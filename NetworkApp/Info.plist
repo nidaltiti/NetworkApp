@@ -35,7 +35,7 @@
 	<key>UIRequiresFullScreen</key>
 	<true/>
 	<key>CFBundleIdentifier</key>
-	<string>com.companyname.NetworkApp</string>
+	<string>com.nidal</string>
 	<key>CFBundleName</key>
 	<string>NetworkApp</string>
 	<key>NSAppleMusicUsageDescription</key>

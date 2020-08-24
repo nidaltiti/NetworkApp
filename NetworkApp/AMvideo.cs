@@ -123,8 +123,8 @@ namespace NetworkApp
                 File.WriteAllBytes(localPath, data);
                 ALAssetsLibrary lib = new ALAssetsLibrary();
                     lib.WriteVideoToSavedPhotosAlbum(NSUrl.FromFilename(localPath), (t, u) => { });
-
-                }
+             
+            }
                 catch (Exception ex)
                 {
 

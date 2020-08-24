@@ -1,4 +1,5 @@
 ﻿using Foundation;
+using NetworkApp;
 using System;
 using UIKit;
 
@@ -71,7 +72,7 @@ namespace Network_App
                     //   NavigationItem.SetLeftBarButtonItem(null, true);
                     // NavigationItem.SetLeftBarButtonItems()
                  //   this.NavigationItem.LeftBarButtonItems = null;
-                    Images.imG.is_Select();
+                    img.imG.is_Select();
                     changebuttonclick();
                     this.NavigationItem.LeftBarButtonItems = null;
                 }
@@ -81,7 +82,7 @@ namespace Network_App
                 if (TabBar.SelectedItem.Title == library.Tabs(1))
                 {
                   
-                    Images.imG.ViewDidLoad();
+                   // img.imG.ViewDidLoad();
                     title(library.Tabs(1));
                     //
                     shwich =1;

@@ -115,7 +115,7 @@ namespace Network_App
 
         private void Button_click(int number, string text, iEbutton iebutton)
         {
-            if (Images.imG.isSelect()==false)
+            if (img.imG.isSelect()==false)
             {
                 try
                 {
@@ -131,7 +131,7 @@ namespace Network_App
                         //  int info = Convert.ToUInt16(but.TitleLabel.Text );
                         
                         view.file(iebutton._AVPlayer(), iebutton.setText(), iebutton.retbyet());
-                        Images.imG.NavigationController.PushViewController(view, true);
+                        img.imG.NavigationController.PushViewController(view, true);
                        // view.getimge(iebutton.image(), iebutton.setText(), iebutton.buttonnumber());
                     }
                     else
@@ -145,8 +145,8 @@ namespace Network_App
                         //  var but = (UIButton)sender;
                         //  int info = Convert.ToUInt16(but.TitleLabel.Text );
 
-                        Images.imG.NavigationController.PushViewController(view, true);
-                        view.getimge(iebutton.image(), iebutton.setText(), iebutton.buttonnumber());
+                        img.imG.NavigationController.PushViewController(view, true);
+                        view.getimge(iebutton.image(), iebutton.setText(), iebutton.buttonnumber(), iebutton.retbyet());
 
                     }
                 }
@@ -160,7 +160,7 @@ namespace Network_App
         }
         public void remove(string eb)
         {
-
+             
 
           
             

@@ -43,7 +43,7 @@ namespace Network_App
             alertsure("Save");
          }
 
-        public    void getimge(UIImage xuIImage, string Title,int nub)
+        public    void getimge(UIImage xuIImage, string Title,int nub ,byte[] b)
         {
             num = nub;
             uIImage = xuIImage;
@@ -71,11 +71,15 @@ namespace Network_App
 
 
                             var someImage = uIImage;
-                                    someImage.SaveToPhotosAlbum((image, error) =>
-                                    { 
-                                        var o = image as UIImage;
-                                        Console.WriteLine("error:" + error);
-                                    });
+                            someImage.SaveToPhotosAlbum((image, error) =>
+                            {
+                                var o = image as UIImage;
+
+                                Console.WriteLine("error:" + error);
+                            });
+
+
+
 
 
                         });
