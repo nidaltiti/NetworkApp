@@ -3,6 +3,7 @@ using AVFoundation;
 using AVKit;
 using CoreMedia;
 using Foundation;
+using Network_App;
 using System;
 using System.IO;
 using System.Linq;
@@ -63,7 +64,29 @@ namespace NetworkApp
 
                 this.PresentViewController(controller, true, null);
             })));
-            alert.AddAction((UIAlertAction.Create("Delete", UIAlertActionStyle.Destructive, (UIAlertAction obj) => { })));
+            alert.AddAction((UIAlertAction.Create("Delete", UIAlertActionStyle.Destructive, (UIAlertAction obj) => {
+                try
+                {
+                    local cal = new local();
+                    //    Images mig =new Images ()
+                    cal.remove(this.Title);
+                    img.imG.ViewDidLoad();
+                }
+                catch
+                {
+                    var armAlert = UIAlertController.Create("database dot open", string.Empty, UIAlertControllerStyle.Alert);
+                    var cancelAction1 = UIAlertAction.Create("ok", UIAlertActionStyle.Cancel, alertAction1 => { });
+
+                    armAlert.AddAction(cancelAction1);
+
+
+                    PresentViewController(armAlert, true, null);
+                }
+
+                NavigationController.PopViewController(true);
+
+
+            })));
             alert.AddAction((UIAlertAction.Create("Cancel", UIAlertActionStyle.Cancel, (UIAlertAction obj) => { })));
 
             this.PresentViewController(alert, true, null);

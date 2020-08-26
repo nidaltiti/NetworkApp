@@ -172,6 +172,20 @@ namespace Network_App
                 DataSql.process(library.File(2), library.DELETE(1), DataSql_Parameters(eb));
                      
         }
+        public void Uplod(string[] eb)
+        {
+
+
+
+
+            DataSql = new DataSql();
+            // DataSql.close();
+
+
+
+            DataSql.process(library.File(2), library.Upload(), DataSql_Parameters(eb));
+
+        }
 
         private SqliteParameterCollection DataSql_Parameters(string data)
         {
@@ -183,6 +197,18 @@ namespace Network_App
             return ReturnParamter;
 
         }
+        private SqliteParameterCollection DataSql_Parameters(string[] data)
+        {
+            SqliteCommand SqliteCommand = new SqliteCommand();
+            SqliteParameterCollection ReturnParamter = SqliteCommand.Parameters;
+
+            ReturnParamter.AddWithValue(LibraryWords.Row, data[0]);
+            ReturnParamter.AddWithValue(LibraryWords.Row +1.ToString(), data[1]);
+            return ReturnParamter;
+
+        }
+
+
         public List<iEbutton> retUIbutton(int add)
         {
 

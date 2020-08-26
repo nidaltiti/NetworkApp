@@ -129,6 +129,9 @@ namespace Network_App
 
 
                     } break;
+
+                case 4: { UPDATE(sql); } break;
+
             }
 
 
@@ -243,6 +246,20 @@ namespace Network_App
 
             command.ExecuteNonQuery();
         }
+
+
+        private void UPDATE(string sql)
+        {
+            command.CommandText = sql;
+
+            foreach (SqliteParameter paramter in Parameters)
+                command.Parameters.Add(paramter);
+
+            int rows = command.ExecuteNonQuery();
+        }
+
+
+
         public void close() {
 
 

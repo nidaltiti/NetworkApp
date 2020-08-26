@@ -49,6 +49,11 @@
                                             <action selector="Delete_Activated:" destination="247" id="263"/>
                                         </connections>
                                     </barButtonItem>
+                                    <barButtonItem id="2522" title="Rename">
+                                        <connections>
+                                            <action selector="ReName_Activated:" destination="247" id="2924"/>
+                                        </connections>
+                                    </barButtonItem>
                                     <barButtonItem title="share" id="264">
                                         <connections>
                                             <action selector="UIBarButtonItem264_Activated:" destination="247" id="712"/>
@@ -106,6 +111,7 @@
                         <outlet property="delete" destination="254" id="253"/>
                         <outlet property="settings_button" destination="266" id="name-outlet-266"/>
                         <outlet property="ximage" destination="252" id="251"/>
+                        <outlet property="ReName" destination="2522" id="name-outlet-2522"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="269" userLabel="First Responder" sceneMemberID="firstResponder"/>

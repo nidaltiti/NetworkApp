@@ -20,6 +20,10 @@ namespace Network_App
 
         [Outlet]
         [GeneratedCode ("iOS Designer", "1.0")]
+        UIKit.UIBarButtonItem ReName { get; set; }
+
+        [Outlet]
+        [GeneratedCode ("iOS Designer", "1.0")]
         UIKit.UIBarButtonItem settings_button { get; set; }
 
         [Outlet]
@@ -29,6 +33,10 @@ namespace Network_App
         [Action ("Delete_Activated:")]
         [GeneratedCode ("iOS Designer", "1.0")]
         partial void Delete_Activated (UIKit.UIBarButtonItem sender);
+
+        [Action ("ReName_Activated:")]
+        [GeneratedCode ("iOS Designer", "1.0")]
+        partial void ReName_Activated (UIKit.UIBarButtonItem sender);
 
         [Action ("Settings_button_Activated:")]
         [GeneratedCode ("iOS Designer", "1.0")]
@@ -43,6 +51,11 @@ namespace Network_App
             if (delete != null) {
                 delete.Dispose ();
                 delete = null;
+            }
+
+            if (ReName != null) {
+                ReName.Dispose ();
+                ReName = null;
             }
 
             if (settings_button != null) {

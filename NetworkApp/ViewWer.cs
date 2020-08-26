@@ -152,7 +152,7 @@ namespace Network_App
                 local cal = new local();
                 //    Images mig =new Images ()
                 cal.remove(text);
-                Images.imG.ViewDidLoad();
+                img.imG.ViewDidLoad();
             }
             catch {
                 var armAlert = UIAlertController.Create("database dot open", string.Empty, UIAlertControllerStyle.Alert);
@@ -189,6 +189,16 @@ namespace Network_App
         partial void Settings_button_Activated(UIBarButtonItem sender)
         {
             throw new NotImplementedException();
+        }
+
+      
+
+        partial void ReName_Activated(UIBarButtonItem sender)
+        {
+            string[] data = new string[] { "nn.jpg", this.Title };
+            local cal = new local();
+            //    Images mig =new Images ()
+            cal.Uplod(data);
         }
     }
 

@@ -60,6 +60,7 @@ namespace Network_App
             if (str.Contains("INSERT")) { i = 2; }
 
             if (str.Contains("DELETE")) { i = 3; }
+            if (str.Contains("UPDATE")) { i = 4; }
             return i;
 
 
@@ -231,7 +232,13 @@ namespace Network_App
             [Description("FROM")]
             FROM,
                  [Description("TRUNCATE TABLE ")]
-            DELETEAll
+            DELETEAll,
+            [Description("UPDATE")]
+            UPDATE,
+            [Description("set")]
+
+            Set,
+
         }; //list enum  
 
 
@@ -286,6 +293,26 @@ namespace Network_App
 
 
         }
+
+
+
+        public String Upload()
+        {
+            string ret = string.Empty;
+
+
+
+
+
+            //ret = GetEnumDescription(choce.DELETE) + " " + GetEnumDescription(table_imagedata.Table);
+
+            ret = GetEnumDescription(choce.UPDATE) + " " + GetEnumDescription(table_imagedata.Table) + " " + GetEnumDescription(choce.Set) + " " + GetEnumDescription(table_imagedata.Titile) + "=" + " " + Row + " " + GetEnumDescription(choce.WHERE) + " " + GetEnumDescription(table_imagedata.Titile) + "=" + " " + Row+1.ToString() ;
+
+            return ret;
+
+
+        }
+
 
     }
 }
