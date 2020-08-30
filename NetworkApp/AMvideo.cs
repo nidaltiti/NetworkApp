@@ -1,6 +1,7 @@
 ﻿using AssetsLibrary;
 using AVFoundation;
 using AVKit;
+using CoreGraphics;
 using CoreMedia;
 using Foundation;
 using Network_App;
@@ -16,6 +17,7 @@ namespace NetworkApp
 
     public partial class AMvideo : AVPlayerViewController
     {
+        LibraryWords library = new LibraryWords();
         string namefile, local;
         AVAsset avasset;
         AVPlayerItem avplayerItem;
@@ -84,6 +86,67 @@ namespace NetworkApp
                 }
 
                 NavigationController.PopViewController(true);
+
+
+            })));
+            alert.AddAction((UIAlertAction.Create("Rename", UIAlertActionStyle.Default, (UIAlertAction obj) => {
+
+                UITextField field = new UITextField();
+
+                //field.Text = this.Title;
+                var frame = new CGRect(40, 40, 300, 60);
+                var messbox = UIAlertController.Create("Change a Name", string.Empty, UIAlertControllerStyle.Alert);
+                messbox.View.BackgroundColor = UIColor.DarkGray;
+                //   UITextField field = null;
+                // UITextField field2 = null;
+                messbox.AddTextField((textField) =>
+                {
+                    // field = textField;
+
+                    // Initialize field
+                    //  field.Placeholder = placeholder;
+                    //  field.Placeholder = library.Messages(0);
+
+                    // field.BackgroundColor = UIColor.Yellow;
+                    //    field.Layer.BorderColor = UIColor.Gray.CGColor;
+
+                    //  field.Font = library.Font();
+                    field = textField;
+                    field.Frame = frame;
+                    field.Layer.BorderWidth = 0;
+                    //   field.Layer.CornerRadius = 20;
+                    //  field = new UITextField(new CoreGraphics.CGRect(10, 60, 300, 60));
+                    //  field.SecureTextEntry = true;
+                });
+                var cancelAction = UIAlertAction.Create(library.StrForm(4), UIAlertActionStyle.Cancel, alertAction => { });
+                var okayAction = UIAlertAction.Create(library.StrForm(3), UIAlertActionStyle.Default, alertAction => {
+
+
+
+                    string[] data = new string[] { field.Text + ".mp4", this.Title };
+                    this.Title = field.Text + ".mp4";
+                    local cal = new local();
+                  
+                    //    Images mig =new Images ()
+                    cal.Uplod(data);
+
+                    img.imG.ViewDidLoad();
+
+                    cal.retUIbutton();
+
+                });
+                
+                messbox.AddAction(cancelAction);
+                messbox.AddAction(okayAction);
+
+                //Present Alert
+                PresentViewController(messbox, true, null);
+
+
+
+
+
+
 
 
             })));

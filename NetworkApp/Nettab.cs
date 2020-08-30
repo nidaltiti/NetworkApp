@@ -73,6 +73,7 @@ namespace Network_App
                     // NavigationItem.SetLeftBarButtonItems()
                  //   this.NavigationItem.LeftBarButtonItems = null;
                     img.imG.is_Select();
+                 //   img.imG.ViewDidLoad();
                     changebuttonclick();
                     this.NavigationItem.LeftBarButtonItems = null;
                 }
