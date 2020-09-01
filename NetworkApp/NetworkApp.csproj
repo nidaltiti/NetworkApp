@@ -156,12 +156,14 @@
     <Compile Include="AMvideo.designer.cs">
       <DependentUpon>AMvideo.cs</DependentUpon>
     </Compile>
+    <Compile Include="cilent.cs" />
     <Compile Include="clickClass.cs" />
     <Compile Include="CollectionViewCell1.cs" />
     <Compile Include="CollectionViewCell1.designer.cs">
       <DependentUpon>CollectionViewCell1.cs</DependentUpon>
     </Compile>
     <Compile Include="DataSql.cs" />
+    <Compile Include="Headers.cs" />
     <Compile Include="iEbutton.cs" />
     <Compile Include="Images.cs" />
     <Compile Include="Images.designer.cs">
@@ -173,6 +175,7 @@
     </Compile>
     <Compile Include="LibraryWords.cs" />
     <Compile Include="list.cs" />
+    <Compile Include="Listen.cs" />
     <Compile Include="local.cs" />
     <Compile Include="Main.cs" />
     <Compile Include="AppDelegate.cs" />
@@ -189,10 +192,13 @@
     <Compile Include="nvn.designer.cs">
       <DependentUpon>nvn.cs</DependentUpon>
     </Compile>
+    <Compile Include="PacketIO.cs" />
+    <Compile Include="Queue.cs" />
     <Compile Include="receive.cs" />
     <Compile Include="sourc.cs" />
     <Compile Include="sourcecollection.cs" />
     <Compile Include="sqlbook.cs" />
+    <Compile Include="Tranferclint.cs" />
     <Compile Include="ViewController.cs" />
     <Compile Include="ViewController.designer.cs">
       <DependentUpon>ViewController.cs</DependentUpon>

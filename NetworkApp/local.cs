@@ -23,7 +23,57 @@ namespace Network_App
      public static   List<iEbutton> UIbutton = new List<iEbutton>();
         List<string> nameimage = new List<string>();
 
-       
+
+
+
+
+        public List<string > retDataString() //retturn string
+        {
+            List<string> Datastring = new List<string>();
+            // data();
+            DataSql.data.Clear();
+            DataSql.Rowdata(1);
+            DataSql.lop = "string";
+            DataSql dataSql = new DataSql();
+            dataSql.process(library.File(2), library.SELECT(0), null);
+            Datastring = DataSql.data;
+           
+            
+            return Datastring;
+
+        }
+        public List<byte[]> retDataByet(int i) //retturn byet
+        {
+            DataSql.databyet.Clear();
+
+            List <byte[] > Data = new List<byte[]>();
+            // data();
+            DataSql.Rowdata(1);
+            DataSql.lop = "byte";
+            DataSql dataSql = new DataSql();
+            dataSql.process(library.File(2), library.SELECT(0), null);
+            Data = DataSql.databyet;
+
+
+            return Data;
+
+        }
+        public List<int> Retdatainger(int i) //retturn byet
+        {
+            DataSql.datainger.Clear();
+
+            List<int> Data = new List<int>();
+            // data();
+            DataSql.Rowdata(1);
+            DataSql.lop = "int";
+            DataSql dataSql = new DataSql();
+            dataSql.process(library.File(2), library.SELECT(0), null);
+            Data = DataSql.datainger;
+
+
+            return Data;
+
+        }
 
         public List<iEbutton> retUIbutton()
         {
@@ -49,7 +99,7 @@ namespace Network_App
                 UIbutton.Clear();
                 sourcecollection._collectionViewCell.Clear();
                 //{
-                DataSql.lop = "";
+                DataSql.lop = "byte";
                 DataSql.Rowdata(1);
                 DataSql.process(library.File(2), library.SELECT(1), null);
 

@@ -24,6 +24,7 @@ namespace Network_App
         IDbCommand commandreader;
     public static    List<string> data = new List<string>();
         public static List<byte[]> databyet= new List<byte[]> ();
+        public static List<int> datainger = new List<int>();
         public static  IDataReader reader;
          int row = 0;
     
@@ -216,7 +217,11 @@ namespace Network_App
                 }
 
             }
-            else
+           
+            
+            
+            
+            else if(lop=="byte")
             {
                 while (reader.Read())
                 {
@@ -225,6 +230,21 @@ namespace Network_App
 
                     databyet.Add(b); }
             }
+
+
+            else if (lop == "int")
+            {
+                while (reader.Read())
+                {
+                    int b ;
+                    b = (int)reader.GetValue(row);
+
+                    datainger.Add(b);
+                }
+            }
+
+
+
         }
         private void DELETE(string sql)
         {
