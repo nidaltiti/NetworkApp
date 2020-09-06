@@ -20,9 +20,9 @@ namespace Network_App
     {
         public static ViewController _ViewController;
         Message library = new Message();
-        UITextField field = null;
-        UITextField field2 = null;
-        DataSql dataSql = new DataSql();
+        //UITextField field =  new UITextField;
+        //UITextField field2 = null;
+       
 
      //   public static string titile;
         //public static string GetEnumDescription( Enum value)
@@ -50,9 +50,10 @@ namespace Network_App
         {
             _ViewController = this;
             Titile();
+            DataSql dataSql = new DataSql();
 
-           
-            dataSql.fileSql(library.File(2));
+
+           dataSql.fileSql(library.File(2));// ceart data file
             DataSql.data.Clear();
             Nettab.bar.plusbutton += Btn_Clicked;
 
@@ -60,18 +61,25 @@ namespace Network_App
             s = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp); // Perform any additional setup after loading the view, typically from a nib.
 
 
+            local _local = new local();
+            listdns = _local.retDataString(0, 0);
+            List <int>listPort= _local.Retdatainger(1, 0);
 
-            dataSql.process(library.File(2),library.SELECT(0), null);
-            listdns = DataSql.data;
-            this.tabview.Source = new sourc(listdns, tabview);
+
+            //dataSql.process(library.File(2),library.SELECT(0), null);
+            // listdns = DataSql.data;
+            this.tabview.Source = new sourc(_local.retDataString(0, 0), _local.Retdatainger(1, 0), tabview);// sends to source
 
 
 
         }
-      
+        string txt=string.Empty;
+        string txtport = string.Empty;
 
         private void Btn_Clicked(object sender, int d)
         {
+            UITextField field = new UITextField ();
+            UITextField field2 = new UITextField();
             if (d == 0)
             {
                 //throw new NotImplementedException();
@@ -79,14 +87,15 @@ namespace Network_App
                 messbox.View.BackgroundColor = UIColor.White;
              //   UITextField field = null;
                // UITextField field2 = null;
-                messbox.AddTextField((textField) =>
+                messbox.AddTextField((textField1) =>
                 {
-                    field = textField;
-
+                    field = textField1;
+                    //field.Text = "5564";
+                  //  field.Text = "";
                     // Initialize field
                     //  field.Placeholder = placeholder;
                     field.Placeholder = library.Messages(0);
-
+                
                     // field.BackgroundColor = UIColor.Yellow;
                     //    field.Layer.BorderColor = UIColor.Gray.CGColor;
 
@@ -101,6 +110,7 @@ namespace Network_App
                 messbox.AddTextField((text) =>
                 {
                     field2 = text;
+                    txtport = text.Text;
                     field2.Frame = frame;
                    // field2.Placeholder = "100";
                     // field2.KeyboardType = UIKeyboardType.Default;
@@ -121,8 +131,12 @@ namespace Network_App
                     int j;
                     if (Int32.TryParse(field2.Text, out j))
                     {
-                       dataSql.process(library.File(2), library.INSERT(1), DataSql_Parameters());
-                        listdns.Add(field.Text);
+                        txt = field.Text;
+                        txtport = field2.Text;
+                        //  field.Text = txt;
+                        DataSql dataSql = new DataSql();
+                        dataSql.process(library.File(2), library.INSERT(1 ), DataSql_Parameters());
+                        //listdns.Add(field.Text);
 Sourcetabview();
                     }
 
@@ -163,15 +177,15 @@ Sourcetabview();
 
 
 
-          
-           
-            this.tabview.Source = new sourc(listdns, tabview);
+            
 
+
+            local _local = new local();
+
+
+            this.tabview.Source = new sourc(_local.retDataString(0, 0), _local.Retdatainger(1, 0), tabview);
             using (var indexPath = NSIndexPath.FromRowSection(0, 0))
                 tabview.InsertRows(new[] { indexPath }, UITableViewRowAnimation.Automatic);
-
-
-
 
         }
     
@@ -181,9 +195,9 @@ Sourcetabview();
             SqliteCommand SqliteCommand = new SqliteCommand();
             SqliteParameterCollection ReturnParamter= SqliteCommand.Parameters  ;
 
-            ReturnParamter.AddWithValue(LibraryWords.Row+0.ToString(),field.Text);
+            ReturnParamter.AddWithValue(LibraryWords.Row+0.ToString(),txt);
 
-            ReturnParamter.AddWithValue(LibraryWords.Row + 1.ToString(), field2.Text);
+            ReturnParamter.AddWithValue(LibraryWords.Row + 1.ToString(), txtport);
 
 
             return ReturnParamter;

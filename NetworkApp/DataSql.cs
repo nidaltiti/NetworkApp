@@ -31,8 +31,8 @@ namespace Network_App
         public void fileSql(string filename)
         {
             pathName(filename);
-           // string docFolder = Environment.GetFolderPath(Environment.SpecialFolder.Personal);
-           // string libFolder = Path.Combine(docFolder, WLibrary.listWords(0), WLibrary.listWords(1), WLibrary.listWords(2));
+            string docFolder = Environment.GetFolderPath(Environment.SpecialFolder.Personal);
+           string libFolder = Path.Combine(docFolder, WLibrary.listWords(0), WLibrary.listWords(1), WLibrary.listWords(2));
 
             if (!Directory.Exists(libFolder))
             {
@@ -173,15 +173,20 @@ namespace Network_App
 
         }
         private void SELECT(string sql) {
-            commandreader = _dbConnection.CreateCommand();
-
-            commandreader.CommandText = sql;
-            reader = commandreader.ExecuteReader();
 
 
+           
 
-            loop();
+                commandreader = _dbConnection.CreateCommand();
 
+                commandreader.CommandText = sql;
+                reader = commandreader.ExecuteReader();
+
+
+
+                loop();
+          
+          
 
 
         } 
@@ -210,9 +215,12 @@ namespace Network_App
                 while (reader.Read())
                 {
                     //
-                    data.Add(reader.GetString(row));
-                    //  string lastName = reader.GetString(1);
-
+                    try
+                    {
+                        data.Add(reader.GetString(row));
+                        //  string lastName = reader.GetString(1);
+                    }
+                    catch { }
 
                 }
 
@@ -221,7 +229,7 @@ namespace Network_App
             
             
             
-            else if(lop=="byte")
+             if(lop=="byte")
             {
                 while (reader.Read())
                 {
@@ -232,12 +240,12 @@ namespace Network_App
             }
 
 
-            else if (lop == "int")
+             if (lop == "int")
             {
                 while (reader.Read())
                 {
                     int b ;
-                    b = (int)reader.GetValue(row);
+                    b =   Convert.ToInt32(  reader.GetValue(row));
 
                     datainger.Add(b);
                 }

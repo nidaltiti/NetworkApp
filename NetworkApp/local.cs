@@ -27,47 +27,49 @@ namespace Network_App
 
 
 
-        public List<string > retDataString() //retturn string
+        public List<string > retDataString(int row, int table) //retturn string
         {
             List<string> Datastring = new List<string>();
             // data();
-            DataSql.data.Clear();
-            DataSql.Rowdata(1);
-            DataSql.lop = "string";
             DataSql dataSql = new DataSql();
-            dataSql.process(library.File(2), library.SELECT(0), null);
+            DataSql.data.Clear();
+            dataSql.Rowdata(row);
+            dataSql.lop = "string";
+          //  DataSql dataSql = new DataSql();
+            dataSql.process(library.File(2), library.SELECT(table), null);
             Datastring = DataSql.data;
            
             
             return Datastring;
 
         }
-        public List<byte[]> retDataByet(int i) //retturn byet
+        public List<byte[]> retDataByet(int row,int table) //retturn byet
         {
             DataSql.databyet.Clear();
 
             List <byte[] > Data = new List<byte[]>();
-            // data();
-            DataSql.Rowdata(1);
-            DataSql.lop = "byte";
             DataSql dataSql = new DataSql();
-            dataSql.process(library.File(2), library.SELECT(0), null);
+            // data();
+            dataSql.Rowdata(row);
+            dataSql.lop = "byte";
+           // DataSql dataSql = new DataSql();
+            dataSql.process(library.File(2), library.SELECT(table), null);
             Data = DataSql.databyet;
 
 
             return Data;
 
         }
-        public List<int> Retdatainger(int i) //retturn byet
+        public List<int> Retdatainger(int row,int table) //retturn int
         {
-            DataSql.datainger.Clear();
-
+            //  DataSql.datainger.Clear();
+            DataSql dataSql = new DataSql();
             List<int> Data = new List<int>();
             // data();
-            DataSql.Rowdata(1);
-            DataSql.lop = "int";
-            DataSql dataSql = new DataSql();
-            dataSql.process(library.File(2), library.SELECT(0), null);
+            dataSql.Rowdata(row);
+            dataSql.lop = "int";
+           
+            dataSql.process(library.File(2), library.SELECT(table), null);
             Data = DataSql.datainger;
 
 

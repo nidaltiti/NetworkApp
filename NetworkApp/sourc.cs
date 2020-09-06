@@ -8,6 +8,7 @@ using Mono.Data.Sqlite;
 using CoreGraphics;
 using System.Collections.Generic;
 using Network_App;
+using NetworkApp;
 
 namespace Network_App
 {
@@ -22,13 +23,20 @@ public class sourc : UITableViewSource
     UITableView tableView;
 
     List<string> cellList = new List<string>();
-    public sourc(List<string> list, UITableView table) {
+    List<int> PortList = new List<int>();
+    public sourc(List<string> list, List<int> PL, UITableView table) {
 
 
 
          CellIdentifier = library.StrForm(0);
 
-        cellList = list; tableView = table; }
+        cellList = list; tableView = table;
+
+
+        PortList = PL;
+
+
+    }
 
 
 
@@ -65,20 +73,24 @@ public class sourc : UITableViewSource
         return true; // return false if you wish to disable editing for a specific indexPath or for all rows
     }
 
-    private void click_connact(UITableViewRowAction row, NSIndexPath indexPath)
+    private void click_connact(UITableViewRowAction row, NSIndexPath indexPath) // Action  Connect button
     {
+        Connect connect = new Connect("",9);
+
 
     }
 
-    private void click_delete(UITableViewRowAction row, NSIndexPath indexPath)
+    private void click_delete(UITableViewRowAction row, NSIndexPath indexPath) //Action Delete button
     {
 
       
 
         dataSql.process(library.File(2), library.DELETE(0), DataSql_Parameters(cellList[indexPath.Row]));
-
+        PortList.RemoveAt(indexPath.Row);
 
         cellList.RemoveAt(indexPath.Row);
+       
+
         //            // delete the row from the table
         tableView.DeleteRows(new NSIndexPath[] { indexPath }, UITableViewRowAnimation.Fade);
         //  tableView.DeleteRows(new[] { indexPath[0] }, UITableViewRowAnimation.Fade);
