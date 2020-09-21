@@ -6,7 +6,7 @@ using System.ComponentModel;
 using CoreGraphics;
 using Mono.Data.Sqlite;
 using CoreGraphics;
-using System.Collections.Generic;
+
 using Network_App;
 using NetworkApp;
 
@@ -24,6 +24,10 @@ public class sourc : UITableViewSource
 
     List<string> cellList = new List<string>();
     List<int> PortList = new List<int>();
+    information _information;
+    List<Clickbuttonconnct> connctionButtons = new List<Clickbuttonconnct>();
+    
+         List<UITableViewCell> xcell = new List<UITableViewCell>();
     public sourc(List<string> list, List<int> PL, UITableView table) {
 
 
@@ -47,6 +51,9 @@ public class sourc : UITableViewSource
         string item = cellList[indexPath.Row];
         if (cell == null) { cell = new UITableViewCell(UITableViewCellStyle.Default, CellIdentifier); }
         cell.TextLabel.Text = item;
+        xcell.Add(cell);
+
+
         return cell;
     }
 
@@ -59,13 +66,14 @@ public class sourc : UITableViewSource
     }
     public override UITableViewRowAction[] EditActionsForRow(UITableView tableView, NSIndexPath indexPath)
     {
-        var conncatbutton = UITableViewRowAction.Create(UITableViewRowActionStyle.Default,library.StrForm(1), click_connact);
+        // var conncatbutton = UITableViewRowAction.Create(UITableViewRowActionStyle.Default,library.StrForm(1), click_connact);
+        Clickbuttonconnct conncatbutton = new Clickbuttonconnct(cellList[indexPath.Row], PortList[indexPath.Row]);
+         var deletebutton = UITableViewRowAction.Create(UITableViewRowActionStyle.Default, library.StrForm(2), click_delete);
 
-        var deletebutton = UITableViewRowAction.Create(UITableViewRowActionStyle.Default, library.StrForm(2), click_delete);
-
-        conncatbutton.BackgroundColor = UIColor.Blue;
+        //conncatbutton.BackgroundColor = UIColor.Blue;
+      connctionButtons.Add(conncatbutton);
         deletebutton.BackgroundColor = UIColor.Red;
-        return new UITableViewRowAction[] { conncatbutton, deletebutton };
+        return new UITableViewRowAction[] { connctionButtons[indexPath.Row].retrun_button(), deletebutton };
 
     }
     public override bool CanEditRow(UITableView tableView, NSIndexPath indexPath)
@@ -75,8 +83,40 @@ public class sourc : UITableViewSource
 
     private void click_connact(UITableViewRowAction row, NSIndexPath indexPath) // Action  Connect button
     {
-        Connect connect = new Connect("",9);
+        if (!information.isconnct) {
 
+
+            _information = new information();
+            _information.connet(cellList[indexPath.Row], PortList[indexPath.Row]);
+            _information.Diconncet += _information_Diconncet;
+            row.Title = "diSconncet";
+
+            row.BackgroundColor = UIColor.Gray;
+          // Connect connect = new Connect("",9);
+        }
+
+        else { row.BackgroundColor = UIColor.Blue;
+            _information.stop();
+            row.Title = library.StrForm(1);
+
+
+
+
+        }
+
+    }
+
+    private void _information_Diconncet(string data)
+    {
+        _information.stop();
+        //if (connctionButtons[0] != null)
+        //{
+        //    connctionButtons[0].Title = library.StrForm(1);
+        //}
+        //else { }
+        // tableView.Source = new sourc(cellList, PortList, tableView);
+        information.isconnct  = false;
+       
 
     }
 

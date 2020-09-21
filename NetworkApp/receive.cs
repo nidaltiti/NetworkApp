@@ -18,11 +18,12 @@ namespace Network_App
 
         void callback(IAsyncResult ar)
         {
+            byte[] buf=null;
             try
             {
 
                 sck.EndReceive(ar);
-                byte[] buf = new byte[8192];
+                buf = new byte[8192];
                 int rec = sck.Receive(buf, buf.Length, 0);
                 if (rec < buf.Length)
                 {
@@ -37,10 +38,21 @@ namespace Network_App
                     }
 
                 }
-                sck.BeginReceive(new byte[] { 0 }, 0, 0, 0, callback, null);
+               
+                   
+                    sck.BeginReceive(new byte[] { 0 }, 0, 0, 0, callback, null);
 
+                   
+                           }
+            catch
+            {
+                if (Diconncet != null)
+                {
+
+                    Diconncet(this, buf);
+
+                }
             }
-            catch { }
 
         }
 
@@ -53,6 +65,13 @@ namespace Network_App
 
 
         public event cilentReviceHandler Receive;
+
+        public delegate void SeverDiconncet(receive sender, byte[] data);
+
+
+
+
+        public event SeverDiconncet Diconncet;
     }
 
 }

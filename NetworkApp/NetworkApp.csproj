@@ -153,6 +153,7 @@
       <DependentUpon>AMvideo.cs</DependentUpon>
     </Compile>
     <Compile Include="cilent.cs" />
+    <Compile Include="Clickbuttonconnct.cs" />
     <Compile Include="clickClass.cs" />
     <Compile Include="CollectionViewCell1.cs" />
     <Compile Include="CollectionViewCell1.designer.cs">
@@ -170,6 +171,7 @@
     <Compile Include="img.designer.cs">
       <DependentUpon>img.cs</DependentUpon>
     </Compile>
+    <Compile Include="information.cs" />
     <Compile Include="LibraryWords.cs" />
     <Compile Include="list.cs" />
     <Compile Include="Listen.cs" />
