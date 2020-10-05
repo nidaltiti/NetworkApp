@@ -4,13 +4,16 @@ using System.Net.Sockets;
 using System.Net;
 using System.Threading.Tasks;
 using System.Text;
+using System.Threading;
+using Newtonsoft.Json;
+using NetworkApp;
 
 namespace Network_App
 {
     class receive
     {
         Socket sck;
-        public  receive(Socket s)
+        public receive(Socket s)
         {
             sck = s;
             sck.BeginReceive(new byte[] { 0 }, 0, 0, 0, callback, null);
@@ -18,7 +21,7 @@ namespace Network_App
 
         void callback(IAsyncResult ar)
         {
-            byte[] buf=null;
+            byte[] buf = null;
             try
             {
 
@@ -38,12 +41,12 @@ namespace Network_App
                     }
 
                 }
-               
-                   
-                    sck.BeginReceive(new byte[] { 0 }, 0, 0, 0, callback, null);
 
-                   
-                           }
+
+                sck.BeginReceive(new byte[] { 0 }, 0, 0, 0, callback, null);
+
+
+            }
             catch
             {
                 if (Diconncet != null)
@@ -62,6 +65,31 @@ namespace Network_App
         public delegate void cilentReviceHandler(receive sender, byte[] data);
 
 
+        public Socket retun_socket (){ return sck; }
+
+        public void SendSocket(List<js> sending)
+        {
+
+
+
+            new Thread(() =>
+            {
+                foreach (js _js in sending)
+                {
+                    Thread.Sleep(2000);
+
+                    string convertsrtring = JsonConvert.SerializeObject(_js);
+
+             byte[]       byetes = Encoding.Default.GetBytes(convertsrtring);
+                    //  Thread.Sleep(1000);
+                   
+                   // sck.Send(byetes);
+                   
+                    sck.Send(byetes);
+                  
+                }
+            }).Start();
+        }
 
 
         public event cilentReviceHandler Receive;

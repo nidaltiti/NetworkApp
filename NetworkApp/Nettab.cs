@@ -63,7 +63,7 @@ namespace Network_App
                
                 if (TabBar.SelectedItem.Title== library.Tabs(0)) {
                   
-                    DataSql.data.Clear();
+               //     DataSql.data.Clear();
                     ViewController._ViewController.ViewDidLoad();
                     title(library.Tabs(0));
                     shwich =0;

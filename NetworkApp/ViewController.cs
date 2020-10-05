@@ -54,7 +54,7 @@ namespace Network_App
 
 
            dataSql.fileSql(library.File(2));// ceart data file
-            DataSql.data.Clear();
+          //  DataSql.data.Clear();
             Nettab.bar.plusbutton += Btn_Clicked;
 
             base.ViewDidLoad();

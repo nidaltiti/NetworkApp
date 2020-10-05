@@ -22,9 +22,16 @@ namespace Network_App
         SqliteConnection _dbConnection;
         SqliteCommand command;
         IDbCommand commandreader;
-    public static    List<string> data = new List<string>();
+
+        public  List<string> stringdata = new List<string>();
+      //  public static    List<string> data = new List<string>();
+     //   public static List<int> atainger = new List<int>();
+        public  List<int> Datainger = new List<int>();
+        
+          public  List<byte[]> DataByet = new List<byte[]>();
+
         public static List<byte[]> databyet= new List<byte[]> ();
-        public static List<int> datainger = new List<int>();
+       // public static List<int> datainger = new List<int>();
         public static  IDataReader reader;
          int row = 0;
     
@@ -191,7 +198,7 @@ namespace Network_App
 
         } 
 
-        public  List<string > GetData() {
+        //public  List<string > GetData() {
 
 
            
@@ -200,8 +207,8 @@ namespace Network_App
           
 
 
-            return data;
-        }
+        //    return data;
+        //}
 
 
         private void loop()
@@ -210,15 +217,18 @@ namespace Network_App
 
             if (lop == "string")
             {
-                data.Clear();
-
+               // data.Clear();
+                stringdata.Clear();
                 while (reader.Read())
                 {
                     //
                     try
                     {
-                        data.Add(reader.GetString(row));
+                     ///   data.Add(reader.GetString(row));
                         //  string lastName = reader.GetString(1);
+
+                        stringdata.Add(reader.GetString(row));
+
                     }
                     catch { }
 
@@ -231,29 +241,44 @@ namespace Network_App
             
              if(lop=="byte")
             {
+                DataByet.Clear();
                 while (reader.Read())
                 {
                     byte[] b = null;
                     b = (byte[])reader.GetValue(row);
 
-                    databyet.Add(b); }
+                    databyet.Add(b);
+
+                    DataByet.Add(b);
+
+                }
             }
 
 
              if (lop == "int")
             {
+                Datainger.Clear();
                 while (reader.Read())
                 {
                     int b ;
                     b =   Convert.ToInt32(  reader.GetValue(row));
 
-                    datainger.Add(b);
+                //    datainger.Add(b);
+                    Datainger.Add(b);
                 }
             }
 
 
 
         }
+
+
+
+
+        public List<string> return_string() { return stringdata; }
+        public List<int> return_Intger() { return Datainger; }
+        public List<byte[]> return_byet() { return DataByet; }
+
         private void DELETE(string sql)
         {
             command.CommandText = sql;

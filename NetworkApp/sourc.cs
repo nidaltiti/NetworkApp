@@ -39,6 +39,19 @@ public class sourc : UITableViewSource
 
         PortList = PL;
 
+        for (int i = 0; i < cellList.Count ;i++) { 
+            
+            
+            
+            
+      Clickbuttonconnct conncatbutton = new Clickbuttonconnct(cellList[i], PortList[i]);
+
+            connctionButtons.Add(conncatbutton);
+
+
+
+        }
+
 
     }
 
@@ -67,11 +80,11 @@ public class sourc : UITableViewSource
     public override UITableViewRowAction[] EditActionsForRow(UITableView tableView, NSIndexPath indexPath)
     {
         // var conncatbutton = UITableViewRowAction.Create(UITableViewRowActionStyle.Default,library.StrForm(1), click_connact);
-        Clickbuttonconnct conncatbutton = new Clickbuttonconnct(cellList[indexPath.Row], PortList[indexPath.Row]);
+       
          var deletebutton = UITableViewRowAction.Create(UITableViewRowActionStyle.Default, library.StrForm(2), click_delete);
 
         //conncatbutton.BackgroundColor = UIColor.Blue;
-      connctionButtons.Add(conncatbutton);
+    
         deletebutton.BackgroundColor = UIColor.Red;
         return new UITableViewRowAction[] { connctionButtons[indexPath.Row].retrun_button(), deletebutton };
 

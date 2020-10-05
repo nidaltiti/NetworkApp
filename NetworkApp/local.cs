@@ -23,7 +23,7 @@ namespace Network_App
      public static   List<iEbutton> UIbutton = new List<iEbutton>();
         List<string> nameimage = new List<string>();
 
-
+        List<byte[]> listByete = new List< byte[] > ();
 
 
 
@@ -32,14 +32,15 @@ namespace Network_App
             List<string> Datastring = new List<string>();
             // data();
             DataSql dataSql = new DataSql();
-            DataSql.data.Clear();
+          //  DataSql.data.Clear();
             dataSql.Rowdata(row);
             dataSql.lop = "string";
           //  DataSql dataSql = new DataSql();
             dataSql.process(library.File(2), library.SELECT(table), null);
-            Datastring = DataSql.data;
-           
-            
+            Datastring = dataSql.return_string();
+
+
+
             return Datastring;
 
         }
@@ -54,7 +55,7 @@ namespace Network_App
             dataSql.lop = "byte";
            // DataSql dataSql = new DataSql();
             dataSql.process(library.File(2), library.SELECT(table), null);
-            Data = DataSql.databyet;
+            Data = dataSql.return_byet();
 
 
             return Data;
@@ -70,7 +71,7 @@ namespace Network_App
             dataSql.lop = "int";
            
             dataSql.process(library.File(2), library.SELECT(table), null);
-            Data = DataSql.datainger;
+            Data = dataSql.return_Intger();
 
 
             return Data;
@@ -94,29 +95,29 @@ namespace Network_App
             try
             {
               //  DataSql DataSql = new DataSql();
-                DataSql.databyet.Clear();
-                DataSql.data.Clear();
+                //DataSql.databyet.Clear();
+                //DataSql.data.Clear();
                 //  uIImage.Clear();
                 nameimage.Clear();
                 UIbutton.Clear();
                 sourcecollection._collectionViewCell.Clear();
                 //{
-                DataSql.lop = "byte";
-                DataSql.Rowdata(1);
-                DataSql.process(library.File(2), library.SELECT(1), null);
-
+                //DataSql.lop = "byte";
+                //DataSql.Rowdata(1);
+                //DataSql.process(library.File(2), library.SELECT(1), null);
+                listByete = retDataByet(1, 1);
 
                 //   uIImage = byeimge();
 
-                DataSql.lop = "string";
-                DataSql.Rowdata(0);
-                DataSql.process(library.File(2), library.SELECT(1), null);
-                nameimage = DataSql.data;
-
+                //DataSql.lop = "string";
+                //DataSql.Rowdata(0);
+                //DataSql.process(library.File(2), library.SELECT(1), null);
+                nameimage = retDataString(0, 1);
+              
                 setbutton();
 
-                DataSql.data.Clear();
-                DataSql.databyet.Clear();
+                //DataSql.data.Clear();
+                //DataSql.databyet.Clear();
                 UIbutton.Clear();
             }
 
@@ -135,7 +136,7 @@ namespace Network_App
 
                 iEbutton button = new iEbutton();
 
-                button.whate_is_byte(DataSql.databyet[icount], icount);
+                button.whate_is_byte(listByete[icount], icount);
             //    button.creation(icount, DataSql.databyet[icount]);
                 button.getText(nameimage[icount]);
                 
