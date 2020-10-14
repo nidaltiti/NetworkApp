@@ -65,7 +65,7 @@ namespace Network_App
         public delegate void cilentReviceHandler(receive sender, byte[] data);
 
 
-        public Socket retun_socket (){ return sck; }
+        public Socket retun_socket() { return sck; }
 
         public void SendSocket(List<js> sending)
         {
@@ -74,21 +74,27 @@ namespace Network_App
 
             new Thread(() =>
             {
-                foreach (js _js in sending)
+                try
                 {
-                    Thread.Sleep(2000);
+                    foreach (js _js in sending)
+                    {
 
-                    string convertsrtring = JsonConvert.SerializeObject(_js);
 
-             byte[]       byetes = Encoding.Default.GetBytes(convertsrtring);
-                    //  Thread.Sleep(1000);
-                   
-                   // sck.Send(byetes);
-                   
-                    sck.Send(byetes);
-                  
+                        string convertsrtring = JsonConvert.SerializeObject(_js);
+
+                        byte[] byetes = Encoding.Default.GetBytes(convertsrtring);
+                        //  Thread.Sleep(1000);
+
+                        // sck.Send(byetes);
+
+                        sck.Send(byetes);
+                        Thread.Sleep(500);
+                    }
                 }
-            }).Start();
+                catch { }
+            }).Start(); 
+      
+        
         }
 
 

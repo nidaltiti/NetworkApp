@@ -21,6 +21,7 @@ namespace  NetworkApp
     {
         public QueueType Type;
         public string Filename;
+        public string Shortname;
         //This will hold our transfer client
         public Tranferclint Client;
         //This will hold our upload thread.
@@ -59,6 +60,7 @@ namespace  NetworkApp
                 var queue = new queue();
                 //Set our filename
                 queue.Filename = fileName;
+                queue.Shortname = fileName;
                 //Set our client
                 queue.Client = client;
                 //Set our queue type to upload.
@@ -81,20 +83,25 @@ namespace  NetworkApp
             }
         }
 
-        public static queue CreateDownloadQueue(Tranferclint client, int id, string saveName, long length)
+        public static queue CreateDownloadQueue(Tranferclint client, int id, string SName, string saveName, long length)
         {
             try
             {
                 //Same as above with some changes.
                 var queue = new queue();
-                queue.Filename = Path.GetFileName(saveName);
+                queue.Filename = saveName;
                 queue.Client = client;
-                  queue.Type = QueueType.Download;
+
+                queue.Shortname = SName;
+
+
+                queue.Type = QueueType.Download;
                 //Create our file stream for writing.
                 queue.FS = new FileStream(saveName, FileMode.Create);
                 //Fill the stream will 0 bytes based on the real size. So we can index write.
-                queue.FS.SetLength(length);
+              
                 queue.Length = length;
+                queue.FS.SetLength(length);
                 //Instead of generating an ID, we will set the ID that has been sent.
                 queue.ID = id;
                 return queue;
