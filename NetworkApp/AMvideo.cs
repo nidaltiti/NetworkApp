@@ -164,15 +164,24 @@ namespace NetworkApp
 
             base.LoadView();
         }
-        public void file(string localfile, string Title,byte[] _byet)
+        public void file( string Title,byte[] _byet)
         {
+
+            string documentsPath = Environment.GetFolderPath(Environment.SpecialFolder.Personal);
+            string localFilename = "play.mov" ; //same if I save the file as .mp4
+            string localPath = Path.Combine(documentsPath, localFilename);
+
+            File.WriteAllBytes(localPath, _byet);
+
+
+
             _videobyte = _byet;
 
             this.Title = namefile = Title;
            
-            local = localfile;
+            local = localPath;
 
-            avasset = AVAsset.FromUrl(NSUrl.FromFilename(localfile));
+            avasset = AVAsset.FromUrl(NSUrl.FromFilename(localPath));
             var avplayerItem = new AVPlayerItem(avasset);
             var avplayer = new AVPlayer(avplayerItem);
             avplayer.Play();
@@ -202,13 +211,13 @@ namespace NetworkApp
            
                 try
             {
-                string documentsPath = Environment.GetFolderPath(Environment.SpecialFolder.Personal);
-                string localFilename =  "text.mov"; //same if I save the file as .mp4
-            var    localPath = Path.Combine(documentsPath, localFilename);
+            //    string documentsPath = Environment.GetFolderPath(Environment.SpecialFolder.Personal);
+            //    string localFilename =  "text.mov"; //same if I save the file as .mp4
+            //var    localPath = Path.Combine(documentsPath, localFilename);
 
-                File.WriteAllBytes(localPath, data);
+              //  File.WriteAllBytes(localPath, data);
                 ALAssetsLibrary lib = new ALAssetsLibrary();
-                    lib.WriteVideoToSavedPhotosAlbum(NSUrl.FromFilename(localPath), (t, u) => { });
+                    lib.WriteVideoToSavedPhotosAlbum(NSUrl.FromFilename(local), (t, u) => { });
              
             }
                 catch (Exception ex)

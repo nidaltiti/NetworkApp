@@ -21,7 +21,10 @@ namespace  NetworkApp
     {
         public QueueType Type;
         public string Filename;
-        public string Shortname;
+      //  public string Shortname;
+
+        public string _Type;
+
         //This will hold our transfer client
         public Tranferclint Client;
         //This will hold our upload thread.
@@ -60,7 +63,7 @@ namespace  NetworkApp
                 var queue = new queue();
                 //Set our filename
                 queue.Filename = fileName;
-                queue.Shortname = fileName;
+                queue.Filename = fileName;
                 //Set our client
                 queue.Client = client;
                 //Set our queue type to upload.
@@ -83,17 +86,17 @@ namespace  NetworkApp
             }
         }
 
-        public static queue CreateDownloadQueue(Tranferclint client, int id, string SName, string saveName, long length)
+        public static queue CreateDownloadQueue(Tranferclint client, int id, string tryp, string saveName ,long length)
         {
             try
             {
                 //Same as above with some changes.
                 var queue = new queue();
-                queue.Filename = saveName;
+                queue._Type = tryp;
                 queue.Client = client;
 
-                queue.Shortname = SName;
-
+                queue.Filename = saveName;
+              //  queue._Type = type;
 
                 queue.Type = QueueType.Download;
                 //Create our file stream for writing.

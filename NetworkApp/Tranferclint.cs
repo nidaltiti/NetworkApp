@@ -153,13 +153,15 @@ namespace NetworkApp
                     {
                         //Read the ID, Filename and length of the file (For progress) from the packet.
                         int id = pr.ReadInt32();
+                       
+                        //string Shortname = pr.ReadString();
+                       string type = pr.ReadString();
                         string fileName = pr.ReadString();
-                        string Shortname = pr.ReadString();
                         long length = pr.ReadInt64();
 
                         //Create our queueload queue.
-                        queue queue = queue.CreateDownloadQueue(this, id, Shortname, Path.Combine(OutputFolder,
-                            Shortname), length);
+                        queue queue = queue.CreateDownloadQueue(this, id, type, Path.Combine(OutputFolder,
+                            fileName),  length);
 
                         //Add it to our transfer list.
                         _transfers.Add(id, queue);

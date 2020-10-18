@@ -7,6 +7,7 @@ using System.Net.Sockets;
 using System.Text;
 using System.Threading;
 using Foundation;
+using Mono.Data.Sqlite;
 using Network_App;
 using Newtonsoft.Json;
 using UIKit;
@@ -17,10 +18,11 @@ namespace NetworkApp
     class information
     {
         public static bool isconnct = false;
-
+        DataSql _DataSql = new DataSql();
         Connect connect;
         receive _receive;
         Connect tansconnet;
+        LibraryWords library = new LibraryWords();
         string outfolder = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
      static   List<queue> _QueueList = new List<queue>();
         Tranferclint _Tranferclint = new Tranferclint();
@@ -86,6 +88,7 @@ namespace NetworkApp
 
 
         }
+        static string Type;
         NSTimer Timer = NSTimer.CreateRepeatingScheduledTimer(TimeSpan.FromSeconds(0.1), delegate {
         
             for (int i=0; i< _QueueList.Count; i++) { 
@@ -93,7 +96,18 @@ namespace NetworkApp
             if(_QueueList[i].Progress==100|| !_QueueList[i].Running)
                 {
 
-                    File.Delete(_QueueList[i].Filename);
+
+
+
+
+                    Type = _QueueList[i]._Type;
+
+
+
+
+
+
+                //    File.Delete(_QueueList[i].Filename);
 
                     _QueueList.RemoveAt(i);
                 }
@@ -115,9 +129,48 @@ namespace NetworkApp
 
 
 
+        private void Save_video(queue Finsh_queue) {
 
 
-            private void _Tranferclint_Queued(object sender, queue queue)
+
+
+
+
+
+
+            var myByteArray = File.ReadAllBytes(Finsh_queue.Filename);
+
+
+
+
+         _DataSql.process(library.File(2), library.INSERT(2), DataSql_Parameters(Finsh_queue.Filename + ".mp4", myByteArray, "Video")); }
+
+        private void Save_image(queue Finsh_queue) {
+
+            var myByteArray = File.ReadAllBytes(Finsh_queue.Filename);
+            _DataSql.process(library.File(2), library.INSERT(2), DataSql_Parameters(Finsh_queue.Filename + ".jpg", myByteArray, "Image"));
+
+
+
+
+
+        }
+        private SqliteParameterCollection DataSql_Parameters(string date, byte[] m, string j)
+        {
+            //  var date = DateTime.Now.ToString(" HH:mm:ss");
+            SqliteCommand SqliteCommand = new SqliteCommand();
+            SqliteParameterCollection ReturnParamter = SqliteCommand.Parameters;
+
+            ReturnParamter.AddWithValue(LibraryWords.Row + 0.ToString(), date);
+
+            ReturnParamter.AddWithValue(LibraryWords.Row + 1.ToString(), m);
+            ReturnParamter.AddWithValue(LibraryWords.Row + 2.ToString(), j);
+
+            return ReturnParamter;
+
+        }
+
+        private void _Tranferclint_Queued(object sender, queue queue)
         {
           if(queue.Type == QueueType.Download)
              _QueueList.Add(queue);

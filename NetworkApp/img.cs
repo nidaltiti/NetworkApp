@@ -838,7 +838,7 @@ namespace NetworkApp
                 string random = GeneratePassword(7);
                 Imagebyeds.Add(myByteArray);
                 strimg.Add(random);
-                DataSql.process(library.File(2), library.INSERT(2), DataSql_Parameters(random+".jpg", myByteArray, "jpg/png"));
+                DataSql.process(library.File(2), library.INSERT(2), DataSql_Parameters(random+".jpg", myByteArray, "Image"));
             }
             foreach (string stringUrl in UrlVideoString)
             {
@@ -858,7 +858,7 @@ namespace NetworkApp
                 string random = GeneratePassword(7);
                 // this.Title = videoUrl.ToString(); ;
 
-                DataSql.process(library.File(2), library.INSERT(2), DataSql_Parameters(random+".mp4", myByteArray, "mov"));
+                DataSql.process(library.File(2), library.INSERT(2), DataSql_Parameters(random+".mp4", myByteArray, "Video"));
             }
 
 
@@ -866,7 +866,7 @@ namespace NetworkApp
             {
                
                     string random = GeneratePassword(7);
-                    DataSql.process(library.File(2), library.INSERT(2), DataSql_Parameters(random + ".jpg", stringUrl, "jpg/png"));
+                    DataSql.process(library.File(2), library.INSERT(2), DataSql_Parameters(random + ".jpg", stringUrl, "Image"));
                 
             }
             

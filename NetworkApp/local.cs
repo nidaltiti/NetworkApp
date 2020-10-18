@@ -155,6 +155,7 @@ namespace Network_App
                     var avplayer = new AVPlayer(avplayerItem);
                     var avplayerLayer = AVPlayerLayer.FromPlayer(avplayer);
                     button.localstring(localPath);
+                    File.Delete(localPath);
                     button.creatFilemov(avplayerLayer);
                 }
                 
@@ -183,7 +184,7 @@ namespace Network_App
                         //  var but = (UIButton)sender;
                         //  int info = Convert.ToUInt16(but.TitleLabel.Text );
                         
-                        view.file(iebutton._AVPlayer(), iebutton.setText(), iebutton.retbyet());
+                        view.file( iebutton.setText(), iebutton.retbyet());
                         img.imG.NavigationController.PushViewController(view, true);
                        // view.getimge(iebutton.image(), iebutton.setText(), iebutton.buttonnumber());
                     }
