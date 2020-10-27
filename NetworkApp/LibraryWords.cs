@@ -144,10 +144,10 @@ namespace Network_App
                
                    ret= GetEnumDescription(choce.SELECT) + column + " " + GetEnumDescription(choce.FROM) + " " + GetEnumDescription(table_ip.Table);
             }
-
+            
             if (i == 1)
             {
-                column = " " + " " + GetEnumDescription(table_imagedata.Titile) + "," + " " + GetEnumDescription(table_imagedata.Image) + "," + " " + GetEnumDescription(table_imagedata.Extension) + " ";
+                column = " " + " " + GetEnumDescription(table_imagedata.Titile) + "," + " " + GetEnumDescription(table_imagedata.Image) + "," + " " + GetEnumDescription(table_imagedata.Thumbnail) + "," + " "+     GetEnumDescription(table_imagedata.Extension) + " ";
 
                 ret = GetEnumDescription(choce.SELECT) + column + " " + GetEnumDescription(choce.FROM) + " " + GetEnumDescription(table_imagedata.Table);
             }
@@ -172,10 +172,10 @@ namespace Network_App
 
             else {
 
+                //change
+                string column = " " + "(" + " " + GetEnumDescription(table_imagedata.Titile) + "," + " " + GetEnumDescription(table_imagedata.Image) + "," + " " + " " + GetEnumDescription(table_imagedata.Thumbnail) + "," + " " + GetEnumDescription(table_imagedata.Extension) + " " + ")";
 
-                string column = " " + "(" + " " + GetEnumDescription(table_imagedata.Titile) + "," + " " + GetEnumDescription(table_imagedata.Image) + "," + " " + GetEnumDescription(table_imagedata.Extension) + " " + ")";
-
-                string rows = " " + "(" + " " + Row + 0.ToString() + " " + "," + " " + Row + 1.ToString() + " " + "," + " " + Row + 2.ToString() + " " + ")";
+                string rows = " " + "(" + " " + Row + 0.ToString() + " " + "," + " " + Row + 1.ToString() + " " + "," + " " + Row + 2.ToString() + " " + "," + " " + Row + 3.ToString() + " " + ")";
 
                 ret = GetEnumDescription(choce.INSERT) + " " + GetEnumDescription(table_imagedata.Table) + column + GetEnumDescription(choce.VALUES) + rows;
 
@@ -266,6 +266,8 @@ namespace Network_App
 
             [Description("Image")]
             Image,
+            [Description("Thumbnail")]
+            Thumbnail,
 
 
             [Description("Extension")]

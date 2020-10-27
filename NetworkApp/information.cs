@@ -6,6 +6,7 @@ using System.Net.Http.Headers;
 using System.Net.Sockets;
 using System.Text;
 using System.Threading;
+using AVFoundation;
 using Foundation;
 using Mono.Data.Sqlite;
 using Network_App;
@@ -22,7 +23,7 @@ namespace NetworkApp
         Connect connect;
         receive _receive;
         Connect tansconnet;
-        LibraryWords library = new LibraryWords();
+      
         string outfolder = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
      static   List<queue> _QueueList = new List<queue>();
         Tranferclint _Tranferclint = new Tranferclint();
@@ -100,14 +101,52 @@ namespace NetworkApp
 
 
 
-                    Type = _QueueList[i]._Type;
+                  //  Type = _QueueList[i]._Type;
 
 
 
+                    DataSql _DataSql = new DataSql();
+
+                    LibraryWords library = new LibraryWords();
+
+                    //   UIImage image;
+
+                    //var myByteArray = File.ReadAllBytes(_QueueList[i].Filename);
+
+                    //byte[] myByteThumbnail= null;
+
+
+                    //if (_QueueList[i]._Type == "Video") {
 
 
 
-                //    File.Delete(_QueueList[i].Filename);
+                    //    //// byte[] myByteArray;
+                    //    CoreMedia.CMTime actualTime;
+                    //    NSError outError;
+                    //    using (var asset = AVAsset.FromUrl(NSUrl.FromFilename(_QueueList[i].Filename)))
+                    //    using (var imageGen = new AVAssetImageGenerator(asset))
+                    //    using (var imageRef = imageGen.CopyCGImageAtTime(new CoreMedia.CMTime(1, 1), out actualTime, out outError))
+                    //    {
+                    //        if (imageRef == null)
+                    //        {
+                    //            // return null;
+                    //        }
+                    //        image = UIImage.FromImage(imageRef);
+                    //    }
+                    //    using (NSData imageData = image.AsPNG())
+                    //    {
+                    //        myByteThumbnail = new Byte[imageData.Length];
+                    //        System.Runtime.InteropServices.Marshal.Copy(imageData.Bytes, myByteThumbnail, 0, Convert.ToInt32(imageData.Length));
+
+
+                    //    }
+                    //}
+                    //else { myByteThumbnail = myByteArray; }
+
+                    //_DataSql.process(library.File(2), library.INSERT(2), DataSql_Parameters(Path.GetFileName(_QueueList[i].Filename), myByteArray, myByteThumbnail, _QueueList[i]._Type));
+                    Save_Data(_QueueList[i]);
+
+                    File.Delete(_QueueList[i].Filename);
 
                     _QueueList.RemoveAt(i);
                 }
@@ -129,42 +168,76 @@ namespace NetworkApp
 
 
 
-        private void Save_video(queue Finsh_queue) {
+        private static void Save_Data(queue Finsh_queue) {
 
 
-
-
-
+            DataSql _DataSql = new DataSql();
+            UIImage image;
+            LibraryWords library = new LibraryWords();
 
 
 
             var myByteArray = File.ReadAllBytes(Finsh_queue.Filename);
 
+            byte[] myByteThumbnail = null;
+
+
+            if ( Finsh_queue._Type == "Video")
+            {
 
 
 
-         _DataSql.process(library.File(2), library.INSERT(2), DataSql_Parameters(Finsh_queue.Filename + ".mp4", myByteArray, "Video")); }
+                //// byte[] myByteArray;
+                CoreMedia.CMTime actualTime;
+                NSError outError;
+                using (var asset = AVAsset.FromUrl(NSUrl.FromFilename (Finsh_queue.Filename)))
+                using (var imageGen = new AVAssetImageGenerator(asset))
+                using (var imageRef = imageGen.CopyCGImageAtTime(new CoreMedia.CMTime(1, 1), out actualTime, out outError))
+                {
+                    if (imageRef == null)
+                    {
+                        // return null;
+                    }
+                    image = UIImage.FromImage(imageRef);
+                }
+                using (NSData imageData = image.AsPNG())
+                {
+                    myByteThumbnail = new Byte[imageData.Length];
+                    System.Runtime.InteropServices.Marshal.Copy(imageData.Bytes, myByteThumbnail, 0, Convert.ToInt32(imageData.Length));
 
-        private void Save_image(queue Finsh_queue) {
 
-            var myByteArray = File.ReadAllBytes(Finsh_queue.Filename);
-            _DataSql.process(library.File(2), library.INSERT(2), DataSql_Parameters(Finsh_queue.Filename + ".jpg", myByteArray, "Image"));
-
-
+                }
+            }
+            else { myByteThumbnail = myByteArray; }
 
 
+            _DataSql.process(library.File(2), library.INSERT(2), DataSql_Parameters(   Path.GetFileName ( Finsh_queue.Filename) , myByteArray, myByteThumbnail, Finsh_queue._Type)); }
 
-        }
-        private SqliteParameterCollection DataSql_Parameters(string date, byte[] m, string j)
+        //private void Save_image(queue Finsh_queue) {
+
+        //    var myByteArray = File.ReadAllBytes(Finsh_queue.Filename);
+        //    _DataSql.process(library.File(2), library.INSERT(2), DataSql_Parameters(Finsh_queue.Filename + ".jpg", myByteArray, "Image"));
+
+
+
+
+
+        //}
+      
+        
+        
+        //change
+        
+        private static SqliteParameterCollection DataSql_Parameters(string date, byte[] m, byte[] g, string j)
         {
             //  var date = DateTime.Now.ToString(" HH:mm:ss");
             SqliteCommand SqliteCommand = new SqliteCommand();
             SqliteParameterCollection ReturnParamter = SqliteCommand.Parameters;
 
             ReturnParamter.AddWithValue(LibraryWords.Row + 0.ToString(), date);
-
             ReturnParamter.AddWithValue(LibraryWords.Row + 1.ToString(), m);
-            ReturnParamter.AddWithValue(LibraryWords.Row + 2.ToString(), j);
+            ReturnParamter.AddWithValue(LibraryWords.Row + 2.ToString(), g);
+            ReturnParamter.AddWithValue(LibraryWords.Row + 3.ToString(), j);
 
             return ReturnParamter;
 
@@ -203,7 +276,7 @@ namespace NetworkApp
             local _local = new local();
             List<string> namefiles = _local.retDataString(0, 1);
 
-            List<string> typefiles = _local.retDataString(2, 1);
+            List<string> typefiles = _local.retDataString(3, 1);
 
             int i = 0;
             

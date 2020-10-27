@@ -36,6 +36,7 @@ namespace NetworkApp
         DataSql DataSql = new DataSql();
         // public static string Titile;
         //  public static Nettab click;
+        List<save_Plus> saveFormGrally = new List<save_Plus>();
         static List<UIImage> uIImage = new List<UIImage>();
         List<UIImageView> ImageView = new List<UIImageView>();
         List<iEbutton> UIbutton = new List<iEbutton>();
@@ -514,8 +515,11 @@ namespace NetworkApp
 
 
         void exration()
-        {
-           // Imagedata.Clear();
+        {   //change 
+
+            saveFormGrally.Clear();
+
+            // Imagedata.Clear();
             int icount = _multiAsset.Assets.Count();
             string date = string.Empty;
             UIImageView imag = new UIImageView();
@@ -527,6 +531,7 @@ namespace NetworkApp
           //  byetdata = new List<byte[]>();
             foreach (PHAsset asset in _multiAsset.Assets)
             {
+                save_Plus save = new save_Plus();
                 bool isvideo = false;
 
                 AVPlayer avplayer = new AVPlayer();
@@ -543,8 +548,9 @@ namespace NetworkApp
 
                             var videoUrl = ((AVFoundation.AVUrlAsset)avsset).Url;
                             string UrlConvertString = (videoUrl.AbsoluteString);
-
-                            UrlVideoString.Add(UrlConvertString);
+                            save.Url = UrlConvertString;
+                            save.Extension = "Video";
+                            // UrlVideoString.Add(UrlConvertString);
 
 
                         });
@@ -565,83 +571,48 @@ namespace NetworkApp
 
                      if (!isvideo)
                      {
-                         //  im = false;
-
-                         //byte[] myByteArray;
-                         //using (NSData imageData = image.AsPNG())
-                         //{
-                         //    myByteArray = new Byte[imageData.Length];
-                         //    System.Runtime.InteropServices.Marshal.Copy(imageData.Bytes, myByteArray, 0, Convert.ToInt32(imageData.Length));
-
-
-                         //}
+                         save.Image= image;
+                         save.Thumbnail = image;
+                         save.Extension = "Image";
+                       // byte[] myByteArray;
+                        // using (NSData imageData = image.AsPNG())
+                        // {
+                        //     myByteArray = new Byte[imageData.Length];
+                        //     System.Runtime.InteropServices.Marshal.Copy(imageData.Bytes, myByteArray, 0, Convert.ToInt32(imageData.Length));
 
 
-
-
-
-                         //    string documentsPath = Environment.GetFolderPath(Environment.SpecialFolder.Personal);
-                         //    string localFilename = "text.jpg"; //same if I save the file as .mp4
-                         //    var localPath = Path.Combine(documentsPath, localFilename);
-
-                         //    File.WriteAllBytes(localPath, myByteArray);
-                         //    byte[] n = File.ReadAllBytes(localPath);
-
-
-                         //Imagedata.Add(image);
-
-                         //string random = GeneratePassword(7);
-
-                         // DataSql.process(library.File(2), library.INSERT(2), DataSql_Parameters(random + ".jpg", n, "jpg/png"));
-
-
-                         //  DataSql.process(library.File(2), library.INSERT(2), DataSql_Parameters(random + ".jpg", n, "jpg/png"));
-                         //node} 
-
-
-
-
-
-
-                         byte[] myByteArray;
-                         using (NSData imageData = image.AsPNG())
-                         {
-                             myByteArray = new Byte[imageData.Length];
-                             System.Runtime.InteropServices.Marshal.Copy(imageData.Bytes, myByteArray, 0, Convert.ToInt32(imageData.Length));
-
-
-                         }
-                         //byetdata.Add(myByteArray);
-                         //  byetdata.Add(myByteArray);
-
-                         //node
-                         string random = GeneratePassword(7);
-                        // string documentsPath = Environment.GetFolderPath(Environment.SpecialFolder.Personal);
-                        // string localFilename = random+".jpg"; //same if I save the file as .mp4
-                       //  var localPath = Path.Combine(documentsPath, localFilename);
-
-                     //    File.WriteAllBytes(localPath, myByteArray);
-                       //  byte[] n = File.ReadAllBytes(localPath);
+                        // }
+                         
+                        
+                        // string random = GeneratePassword(7);
+                       
 
 
 
 
                        
+
                          
 
-                        // Imagedata.Add(image);
-                           DataSql.process(library.File(2), library.INSERT(2), DataSql_Parameters(random + ".jpg", myByteArray, "jpg/png"));
+                        //// Imagedata.Add(image);
+                        //   DataSql.process(library.File(2), library.INSERT(2), DataSql_Parameters(random + ".jpg", myByteArray, "image"));
                          //node
                         
-                     }
+                     }// if isvideo
+                     else
+                     {
+                         save.Thumbnail = image;
 
+
+
+                     }
                      isvideo = true;
 
                      // button.creation(i, image);
 
                      //  date = DateTime.Now.ToString("MMddHHmmss");
                      icount--;
-
+                     saveFormGrally.Add(save);
                      Thread.Sleep(500);
 
                  });
@@ -819,70 +790,123 @@ namespace NetworkApp
         }
         void todatabesevideo()
         { }
+       
+        
+        
+        
         void todatabese()
-        {
+        { //change
             List<byte[]> Imagebyeds = new List<byte[]>();
             List<string> strimg = new List<string>();
-            foreach (UIImage image1 in Imagedata)
-            {
-                DataSql = new DataSql();
-              
-                Byte[] myByteArray;
-                using (NSData imageData = image1.AsPNG())
-                {
-                    myByteArray = new Byte[imageData.Length];
-                    System.Runtime.InteropServices.Marshal.Copy(imageData.Bytes, myByteArray, 0, Convert.ToInt32(imageData.Length));
-
-
-                }
-                string random = GeneratePassword(7);
-                Imagebyeds.Add(myByteArray);
-                strimg.Add(random);
-                DataSql.process(library.File(2), library.INSERT(2), DataSql_Parameters(random+".jpg", myByteArray, "Image"));
-            }
-            foreach (string stringUrl in UrlVideoString)
+            foreach (save_Plus Savefile in saveFormGrally)
             {
 
 
                 DataSql = new DataSql();
 
-                byte[] myByteArray;
-                using (NSData data = NSData.FromUrl(NSUrl.FromString(stringUrl)))
+
+                if (Savefile.Extension == "Image")
                 {
+                    //DataSql = new DataSql();
+
+                  //  Byte[] myByteArray;
+                    using (NSData imageData = Savefile.Image.AsPNG())
+                    {
+                        Savefile.ImageToBytes = new Byte[imageData.Length];
+                        System.Runtime.InteropServices.Marshal.Copy(imageData.Bytes, Savefile.ImageToBytes, 0, Convert.ToInt32(imageData.Length));
 
 
-                    myByteArray = new byte[data.Length];
+                    }// tumblt
 
-                    System.Runtime.InteropServices.Marshal.Copy(data.Bytes, myByteArray, 0, Convert.ToInt32(data.Length));
+                    using (NSData Thumbnaildata = Savefile.Thumbnail.AsPNG())
+                    {
+                        Savefile.ThumbnailToBytes = new Byte[Thumbnaildata.Length];
+                        System.Runtime.InteropServices.Marshal.Copy(Thumbnaildata.Bytes, Savefile.ThumbnailToBytes, 0, Convert.ToInt32(Thumbnaildata.Length));
+
+
+                    }
+
+
+                    Savefile.Title= GeneratePassword(7);
+                   // Imagebyeds.Add(myByteArray);
+                  //  strimg.Add(random);
+                    DataSql.process(library.File(2), library.INSERT(2), DataSql_Parameters(Savefile.Title + ".jpg", Savefile.ImageToBytes, Savefile.ThumbnailToBytes, Savefile.Extension));
                 }
-                string random = GeneratePassword(7);
-                // this.Title = videoUrl.ToString(); ;
 
-                DataSql.process(library.File(2), library.INSERT(2), DataSql_Parameters(random+".mp4", myByteArray, "Video"));
+
+                else
+                {
+                    using (NSData Thumbnaildata = Savefile.Thumbnail.AsPNG())
+                    {
+                        Savefile.ThumbnailToBytes = new Byte[Thumbnaildata.Length];
+                        System.Runtime.InteropServices.Marshal.Copy(Thumbnaildata.Bytes, Savefile.ThumbnailToBytes, 0, Convert.ToInt32(Thumbnaildata.Length));
+
+
+                    }
+
+                    using (NSData data = NSData.FromUrl(NSUrl.FromString(Savefile.Url)))
+                    {
+
+
+                        Savefile.ImageToBytes = new byte[data.Length];
+
+                        System.Runtime.InteropServices.Marshal.Copy(data.Bytes, Savefile.ImageToBytes, 0, Convert.ToInt32(data.Length));
+                    }
+                    Savefile.Title = GeneratePassword(7);
+                   
+                    
+                    DataSql.process(library.File(2), library.INSERT(2), DataSql_Parameters(Savefile.Title + ".mp4", Savefile.ImageToBytes, Savefile.ThumbnailToBytes, Savefile.Extension));
+
+                }
+
+
+
+
             }
+            //foreach (string stringUrl in UrlVideoString)
+            //{
 
 
-            foreach (byte[] stringUrl in byetdata)
-            {
+            //    DataSql = new DataSql();
+
+            //    byte[] myByteArray;
+            //    using (NSData data = NSData.FromUrl(NSUrl.FromString(stringUrl)))
+            //    {
+
+
+            //        myByteArray = new byte[data.Length];
+
+            //        System.Runtime.InteropServices.Marshal.Copy(data.Bytes, myByteArray, 0, Convert.ToInt32(data.Length));
+            //    }
+            //    string random = GeneratePassword(7);
+            //    // this.Title = videoUrl.ToString(); ;
+
+            //    DataSql.process(library.File(2), library.INSERT(2), DataSql_Parameters(random+".mp4", myByteArray, "Video"));
+            //}
+
+
+            //foreach (byte[] stringUrl in byetdata)
+            //{
                
-                    string random = GeneratePassword(7);
-                    DataSql.process(library.File(2), library.INSERT(2), DataSql_Parameters(random + ".jpg", stringUrl, "Image"));
+            //        string random = GeneratePassword(7);
+            //        DataSql.process(library.File(2), library.INSERT(2), DataSql_Parameters(random + ".jpg", stringUrl, "Image"));
                 
-            }
+            //}
             
          // 
 
             reload();
+            saveFormGrally.Clear();
             //cal.addbutton(Imagebyeds, strimg);
             // Imagebyeds.Clear();
             // strimg.Clear();
-            UrlVideoString.Clear();
-            Imagedata.Clear();
-            byetdata.Clear();
+            //UrlVideoString.Clear();
+            //Imagedata.Clear();
+            //byetdata.Clear();
         }
 
 
-        private SqliteParameterCollection DataSql_Parameters(string date, byte[] m, string j)
+        private SqliteParameterCollection DataSql_Parameters(string date, byte[] m, byte[] t, string j)
         {
             //  var date = DateTime.Now.ToString(" HH:mm:ss");
             SqliteCommand SqliteCommand = new SqliteCommand();
@@ -891,8 +915,8 @@ namespace NetworkApp
             ReturnParamter.AddWithValue(LibraryWords.Row + 0.ToString(), date);
 
             ReturnParamter.AddWithValue(LibraryWords.Row + 1.ToString(), m);
-            ReturnParamter.AddWithValue(LibraryWords.Row + 2.ToString(), j);
-
+            ReturnParamter.AddWithValue(LibraryWords.Row + 2.ToString(), t);
+            ReturnParamter.AddWithValue(LibraryWords.Row + 3.ToString(), j);
             return ReturnParamter;
 
         }

@@ -64,7 +64,7 @@ namespace Network_App
                 if (TabBar.SelectedItem.Title== library.Tabs(0)) {
                   
                //     DataSql.data.Clear();
-                    ViewController._ViewController.ViewDidLoad();
+                  //  ViewController._ViewController.ViewDidLoad();
                     title(library.Tabs(0));
                     shwich =0;
                 //    sendbutton.Enabled = false;
@@ -83,7 +83,7 @@ namespace Network_App
                 if (TabBar.SelectedItem.Title == library.Tabs(1))
                 {
                   
-                   // img.imG.ViewDidLoad();
+                    img.imG.ViewDidLoad();
                     title(library.Tabs(1));
                     //
                     shwich =1;

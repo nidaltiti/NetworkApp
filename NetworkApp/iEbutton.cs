@@ -37,13 +37,16 @@ namespace NetworkApp
         AVPlayer player;
         bool isvideo = false;
         string localPath;
-        AVPlayerViewController playerController = new AVPlayerViewController();
-        AVPlayerLayer avplayerLayer;
-        AVAsset avasset;
-        AVPlayerItem avplayerItem;
-        AVPlayerViewController avpvc = new AVPlayerViewController();
+        string Extension;
+      //  AVPlayerViewController playerController = new AVPlayerViewController();
+      //  AVPlayerLayer avplayerLayer;
+     //   AVAsset avasset;
+        //AVPlayerItem avplayerItem;
+     //   AVPlayerViewController avpvc = new AVPlayerViewController();
 
         byte[] _byte;
+        byte[] _tumbbyte;
+
         public void whate_is_byte(byte[] img,int i) {
             _byte = img;
             //ebutton = new UIButton();
@@ -54,26 +57,31 @@ namespace NetworkApp
 
             _UIImageView.Image = coVimage(img);
 
-            if (_UIImageView.Image != null)
-            {
 
-              //  uiimag = coVimage(img);
+            if (Extension == "Video") { isvideo = true; } else { isvideo = false; }
+            
+            //if (_UIImageView.Image != null)
+            //{
+
+            //  //  uiimag = coVimage(img);
 
 
-                //ebutton.SetImage(coVimage(img), UIControlState.Normal);
-                //ebutton.TouchUpInside += Ebutton_TouchUpInside;
+            //    //ebutton.SetImage(coVimage(img), UIControlState.Normal);
+            //    //ebutton.TouchUpInside += Ebutton_TouchUpInside;
 
-            }
-            else
-            {
+            //}
+            //else
+            //{
 
-                isvideo = true;
+            //    isvideo = true;
 
-              //  ebutton.TouchUpInside += Ebutton_TouchUpInside;
+            //  //  ebutton.TouchUpInside += Ebutton_TouchUpInside;
 
-            }
+            //}
         }
         public byte[] retbyet() { return _byte; }
+        public byte[] rettumblin() { return _tumbbyte; }
+
         public void creationimge()
         {
             //_byte = img;
@@ -136,8 +144,8 @@ namespace NetworkApp
             if (isvideo) {
                 try
                 {
-                    avplayerLayer.Frame = ebutton.Frame;
-                    avplayerLayer.Bounds = ebutton.Bounds;
+                  //  avplayerLayer.Frame = ebutton.Frame;
+                   // avplayerLayer.Bounds = ebutton.Bounds;
                 }
                 catch { }
 
@@ -189,30 +197,33 @@ namespace NetworkApp
             return ReturnParamter;
 
         }
-   public     void creatFilemov(AVPlayerLayer videoData)
+   public     void creatFilemov(byte[] videoData)
         {
 
 
-         
 
-           
+            //  change
+
+            UIImageView tumbnil = new UIImageView();
+
+
             UIImageView playerbutton = new UIImageView();
-            playerbutton.Frame = new CGRect(45,45,25,25);
+            playerbutton.Frame = new CGRect(45,45,30,30);
+            tumbnil.Frame = new CGRect(0, 0, 75, 75);
 
-        
             playerbutton.Image = UIImage.FromBundle("player.png");
-             
-               avplayerLayer = videoData;
 
-            avplayerLayer.BackgroundColor = UIColor.Black.CGColor;
-          
-            avpvc.Title = "this video";
-         
-           
-                ebutton.Layer.AddSublayer(avplayerLayer);
-                ebutton.AddSubviews(playerbutton);
+            tumbnil.Image = coVimage(videoData);
+
+            //   avplayerLayer.BackgroundColor = UIColor.Black.CGColor;
+
+            //  avpvc.Title = "this video";
+          //  ebutton.SetImage(coVimage(videoData), UIControlState.Normal);
+           ebutton.AddSubviews(tumbnil);
+            //ebutton.Layer.AddSublayer(avplayerLayer);
+            ebutton.AddSubviews(playerbutton);
                 ebutton.TouchUpInside += Ebutton_TouchUpInside;
-            
+            //ebutton.AddSubviews(avplayerLayer)
         }
         public string _AVPlayer() { return localPath;
 
@@ -221,5 +232,11 @@ namespace NetworkApp
         }
         public void  localstring(string g) { localPath = g; }
         public bool _isvideor() { return isvideo; }
+
+        public void ext(string g) { Extension = g; }
+
+
+
     }
+   
 }
