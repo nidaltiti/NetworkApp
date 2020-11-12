@@ -23,11 +23,12 @@ namespace NetworkApp
         Connect connect;
         receive _receive;
         Connect tansconnet;
-      
-        string outfolder = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
-     static   List<queue> _QueueList = new List<queue>();
-        Tranferclint _Tranferclint = new Tranferclint();
 
+        string outfolder = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
+        static List<queue> _QueueList = new List<queue>();
+    static    Tranferclint _Tranferclint = new Tranferclint();
+        static int w;
+     static   ListSQL _ListSQL = new ListSQL();
 
 
 
@@ -47,7 +48,7 @@ namespace NetworkApp
 
                 new Thread(() => {
 
-                   // Thread.Sleep(500);
+                    // Thread.Sleep(500);
                     tansconnet = new Connect(Address, port);
 
                     connect = new Connect(Address, --port);
@@ -66,6 +67,7 @@ namespace NetworkApp
                     ConverToJson();
 
                     send();
+
 
                 }).Start();
 
@@ -91,17 +93,22 @@ namespace NetworkApp
         }
         static string Type;
         NSTimer Timer = NSTimer.CreateRepeatingScheduledTimer(TimeSpan.FromSeconds(0.1), delegate {
-        
-            for (int i=0; i< _QueueList.Count; i++) { 
-            
-            if(_QueueList[i].Progress==100|| !_QueueList[i].Running)
+
+
+          
+
+
+
+            for (int i = 0; i < _QueueList.Count; i++) {
+
+                if (_QueueList[i].Progress == 100 || !_QueueList[i].Running)
                 {
 
 
 
 
 
-                  //  Type = _QueueList[i]._Type;
+                    //  Type = _QueueList[i]._Type;
 
 
 
@@ -144,25 +151,28 @@ namespace NetworkApp
                     //else { myByteThumbnail = myByteArray; }
 
                     //_DataSql.process(library.File(2), library.INSERT(2), DataSql_Parameters(Path.GetFileName(_QueueList[i].Filename), myByteArray, myByteThumbnail, _QueueList[i]._Type));
-                    Save_Data(_QueueList[i]);
 
+                    if (_QueueList[i].Type == QueueType.Download)
+                    {
+
+                        Save_Data(_QueueList[i]);
+                    }
                     File.Delete(_QueueList[i].Filename);
 
                     _QueueList.RemoveAt(i);
                 }
 
-
-
+               
 
 
 
             }
-        
-        
-        
-        
-        
-        
+
+
+
+
+
+
         });
 
 
@@ -182,7 +192,7 @@ namespace NetworkApp
             byte[] myByteThumbnail = null;
 
 
-            if ( Finsh_queue._Type == "Video")
+            if (Finsh_queue._Type == "Video")
             {
 
 
@@ -190,7 +200,7 @@ namespace NetworkApp
                 //// byte[] myByteArray;
                 CoreMedia.CMTime actualTime;
                 NSError outError;
-                using (var asset = AVAsset.FromUrl(NSUrl.FromFilename (Finsh_queue.Filename)))
+                using (var asset = AVAsset.FromUrl(NSUrl.FromFilename(Finsh_queue.Filename)))
                 using (var imageGen = new AVAssetImageGenerator(asset))
                 using (var imageRef = imageGen.CopyCGImageAtTime(new CoreMedia.CMTime(1, 1), out actualTime, out outError))
                 {
@@ -211,7 +221,7 @@ namespace NetworkApp
             else { myByteThumbnail = myByteArray; }
 
 
-            _DataSql.process(library.File(2), library.INSERT(2), DataSql_Parameters(   Path.GetFileName ( Finsh_queue.Filename) , myByteArray, myByteThumbnail, Finsh_queue._Type)); }
+            _DataSql.process(library.File(2), library.INSERT(2), DataSql_Parameters(Path.GetFileName(Finsh_queue.Filename), myByteArray, myByteThumbnail, Finsh_queue._Type)); }
 
         //private void Save_image(queue Finsh_queue) {
 
@@ -223,11 +233,11 @@ namespace NetworkApp
 
 
         //}
-      
-        
-        
+
+
+
         //change
-        
+
         private static SqliteParameterCollection DataSql_Parameters(string date, byte[] m, byte[] g, string j)
         {
             //  var date = DateTime.Now.ToString(" HH:mm:ss");
@@ -245,10 +255,12 @@ namespace NetworkApp
 
         private void _Tranferclint_Queued(object sender, queue queue)
         {
-          if(queue.Type == QueueType.Download)
-             _QueueList.Add(queue);
-            _Tranferclint.StartTransfer(queue);
+            if (queue.Type == QueueType.Download) { _Tranferclint.StartTransfer(queue); }
+
+
+            _QueueList.Add(queue);
         }
+
 
         private void send()
         {
@@ -262,7 +274,7 @@ namespace NetworkApp
 
 
 
-          
+
 
 
 
@@ -272,29 +284,44 @@ namespace NetworkApp
 
 
         }
+       // string localPath;
         private void ConverToJson() {
             local _local = new local();
-            List<string> namefiles = _local.retDataString(0, 1);
 
-            List<string> typefiles = _local.retDataString(3, 1);
+            _ListSQL.NameFile = _local.retDataString(0, 1);
+            _ListSQL.Type = _local.retDataString(3, 1);
+
+            //  _ListSQL.ImageToBytes
+
+
+
+            _ListSQL.ImageToBytes = _local.retDataByet(1, 1);
+            // throw new NotImplementedException();
+            //string documentsPath = Environment.GetFolderPath(Environment.SpecialFolder.Personal);
+            //string localFilename = _ListSQL.NameFile[0]; //same if I save the file as .mp4
+            //localPath = Path.Combine(documentsPath, localFilename);
+
+            //File.WriteAllBytes(localPath, _ListSQL.ImageToBytes[0]);
+
+
 
             int i = 0;
-            
-            
-            while ( i< namefiles.Count) {
-                js _js = new js { NameFile = namefiles[i], Type = typefiles[i] };
+
+
+            while (i < _ListSQL.NameFile.Count) {
+                js _js = new js { NameFile = _ListSQL.NameFile[i], Type = _ListSQL.Type[i] };
 
                 json_list.Add(_js);
 
                 i++;
-                    
-                    
-                    
-                    }
-       
-        
-        
-        
+
+
+
+            }
+
+
+
+
         }
 
 
@@ -310,8 +337,45 @@ namespace NetworkApp
 
         private void _receive_Receive(receive sender, byte[] data)
         {
-            throw new NotImplementedException();
+            string localPath = string.Empty;
+            //throw new NotImplementedException();
+            new Thread(() =>
+            {
+                string documentsPath = Environment.GetFolderPath(Environment.SpecialFolder.Personal);
+                string localFilename = _ListSQL.NameFile[0]; //same if I save the file as .mp4
+                 localPath = Path.Combine(documentsPath, localFilename);
+               
+                File.WriteAllBytes(localPath, _ListSQL.ImageToBytes[0]);
+                Thread.Sleep(100);
+                _Tranferclint.QueueTransfer(localPath);
+            }).Start();
+
+
+            // Upload(_Tranferclint, _ListSQL);
+         //   w = 1;
+
+           
+
+
+
+
         }
+
+
+        static void Upload(Tranferclint _Tranferclint, ListSQL _ListSQL ) {
+
+
+        
+        
+        
+        
+        
+        
+        }
+
+
+
+
 
         public void stop (){
 
@@ -320,7 +384,9 @@ namespace NetworkApp
             {
                 connect.close();
                 _Tranferclint.Close();
-
+                _QueueList.Clear();
+                tansconnet.close();
+                _Tranferclint = new Tranferclint();
             }
             catch { }
 

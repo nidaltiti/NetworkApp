@@ -14,9 +14,18 @@ namespace NetworkApp
        // public int id { get; set; }
         public string NameFile { get; set; }
         public string Type { get; set; }
+      //  public byte[] ImageToBytes { get; set; }
+
     }
 
+    class ListSQL
+    {
+        // public int id { get; set; }
+        public List <string >NameFile { get; set; }
+        public List<string> Type { get; set; }
+        public List <byte[]> ImageToBytes { get; set; }
 
+    }
     class  save_Plus {
 
         public string Title { get; set; }

@@ -63,7 +63,12 @@ namespace  NetworkApp
                 var queue = new queue();
                 //Set our filename
                 queue.Filename = fileName;
-                queue.Filename = fileName;
+                // queue.Filename = fileName;
+
+                queue._Type = Path.GetFileName(fileName).ToLower().Contains("jpg") || Path.GetFileName(fileName).ToLower().Contains("png") ? "Image" : "Video";
+
+
+
                 //Set our client
                 queue.Client = client;
                 //Set our queue type to upload.
@@ -86,17 +91,17 @@ namespace  NetworkApp
             }
         }
 
-        public static queue CreateDownloadQueue(Tranferclint client, int id, string tryp, string saveName ,long length)
+        public static queue CreateDownloadQueue(Tranferclint client, int id, string typ, string saveName ,long length)
         {
             try
             {
                 //Same as above with some changes.
                 var queue = new queue();
-                queue._Type = tryp;
+                queue._Type = typ;
                 queue.Client = client;
 
                 queue.Filename = saveName;
-              //  queue._Type = type;
+              queue._Type = typ;
 
                 queue.Type = QueueType.Download;
                 //Create our file stream for writing.

@@ -86,6 +86,7 @@ namespace NetworkApp
                 pw.Write((byte)Headers.Queue);
                 pw.Write(queue.ID);
                 pw.Write(queue.Filename);
+                pw.Write(queue._Type);
                 pw.Write(queue.Length);
                 Send(pw.GetBytes());
 
