@@ -11,6 +11,7 @@ using Foundation;
 using Mono.Data.Sqlite;
 using Network_App;
 using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 using UIKit;
 
 
@@ -23,7 +24,7 @@ namespace NetworkApp
         Connect connect;
         receive _receive;
         Connect tansconnet;
-
+        static bool  downloading = false;
         string outfolder = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
         static List<queue> _QueueList = new List<queue>();
     static    Tranferclint _Tranferclint = new Tranferclint();
@@ -37,7 +38,7 @@ namespace NetworkApp
 
         public delegate void SeverDiconncet(String data);
 
-        List<js> json_list = new List<js>();
+       static List<js> json_list = new List<js>();
 
 
         public event SeverDiconncet Diconncet;
@@ -162,13 +163,13 @@ namespace NetworkApp
                     _QueueList.RemoveAt(i);
                 }
 
-               
+             
 
 
 
             }
 
-
+            if (downloading) { ConverToJson(); downloading = false; }
 
 
 
@@ -255,7 +256,7 @@ namespace NetworkApp
 
         private void _Tranferclint_Queued(object sender, queue queue)
         {
-            if (queue.Type == QueueType.Download) { _Tranferclint.StartTransfer(queue); }
+            if (queue.Type == QueueType.Download) { _Tranferclint.StartTransfer(queue); downloading = true; }
 
 
             _QueueList.Add(queue);
@@ -285,7 +286,11 @@ namespace NetworkApp
 
         }
        // string localPath;
-        private void ConverToJson() {
+        private static  void   ConverToJson() {
+
+
+            json_list.Clear();
+
             local _local = new local();
 
             _ListSQL.NameFile = _local.retDataString(0, 1);
@@ -336,7 +341,7 @@ namespace NetworkApp
         }
 
         private void _receive_Receive(receive sender, byte[] data)
-        {
+        {   /*
             string localPath = string.Empty;
             //throw new NotImplementedException();
             new Thread(() =>
@@ -349,17 +354,153 @@ namespace NetworkApp
                 Thread.Sleep(100);
                 _Tranferclint.QueueTransfer(localPath);
             }).Start();
+           
+          */
+          
+            string datasting = Encoding.Default.GetString(data);
+            string jsonstring = "[" + datasting + "]";
+            JArray format = JArray.Parse(jsonstring);
+            int i = format[0]["numbcommdan"].Value<int>();
 
+            //  string j= format[0]["array"][1].Value<string>();
+            _listcomand.Clear();
+            aray(format,0);
+
+
+            command(i, format);
 
             // Upload(_Tranferclint, _ListSQL);
-         //   w = 1;
+            //   w = 1;
 
-           
+
 
 
 
 
         }
+        List<string> _listcomand = new List<string>();
+        void aray(JArray JD,int iJ)
+        {
+            _listcomand.Add(JD[0]["array"][iJ].Value<string>());
+
+          
+            try
+            {
+
+
+                iJ++;
+                aray(JD, iJ);
+               
+
+              
+            }
+            catch { }
+        }
+        void command(int i, JArray JD) {
+            switch (i) 
+            {
+
+                case 0: dowload_now(); break;
+                case 1: Delete(); break;
+                case 2:  Delete_all() ; break;
+                case 3: dowloadAll(); break;
+            }
+        
+        
+        
+        
+        
+        }
+        void dowloadAll()
+        {
+            for (int i = 0; i < _ListSQL.NameFile.Count; i++)
+
+            {
+              
+                    string filename = _ListSQL.NameFile[i];
+                    byte[] byetesfile = _ListSQL.ImageToBytes[i];
+                    new Thread(() =>
+                    {
+                        string documentsPath = Environment.GetFolderPath(Environment.SpecialFolder.Personal);
+                        string localFilename = filename; //same if I save the file as .mp4
+                        string localPath = Path.Combine(documentsPath, localFilename);
+                        Thread.Sleep(5);
+                        File.WriteAllBytes(localPath, byetesfile);
+
+                        _Tranferclint.QueueTransfer(localPath);
+                    }).Start();
+
+
+                
+            }
+        }
+        void Delete_all() { 
+            local _local = new local();
+
+            _local.Delete_all();
+
+
+
+
+        }
+        void dowload_now() {
+            //int i = 0;
+           
+            
+            
+            for (int i = 0; i < _listcomand.Count;  i++) {
+                
+                for (int j = 0; j < _ListSQL.NameFile.Count; j++)
+
+                {
+                    if (_listcomand[i] == _ListSQL.NameFile[j])
+                    
+                        {
+                        string filename = _ListSQL.NameFile[j];
+                        byte[] byetesfile = _ListSQL.ImageToBytes[j];
+                        new Thread(() =>
+                        {
+                            string documentsPath = Environment.GetFolderPath(Environment.SpecialFolder.Personal);
+                            string localFilename = filename; //same if I save the file as .mp4
+                            string localPath = Path.Combine(documentsPath, localFilename);
+                            Thread.Sleep(5);
+                            File.WriteAllBytes(localPath, byetesfile);
+
+                            _Tranferclint.QueueTransfer(localPath);
+                        }).Start();
+                        
+                        
+                    }
+                  
+                }
+               
+            }
+        }
+
+
+
+
+
+
+        void   Delete() {
+            int i = 0;
+            while (i<_listcomand.Count) {
+
+                
+                
+                
+                local cal = new local();
+                //    Images mig =new Images ()
+                cal.remove(_listcomand[i]);
+                i++;
+
+            }
+        
+        
+        
+        
+        }
+       
 
 
         static void Upload(Tranferclint _Tranferclint, ListSQL _ListSQL ) {

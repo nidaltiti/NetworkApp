@@ -297,6 +297,10 @@ namespace Network_App
             }
            
         }
+     public   void Delete_all() { 
+            
+            
+      DataSql.process(library.File(2), library.detleteAll(), null); }
 
       
     }

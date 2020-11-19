@@ -19,6 +19,7 @@ namespace NetworkApp
         public event TransferEventHandler ProgressChanged; //This will be called when progres is made.
         public event TransferEventHandler Stopped; //This will be called when a transfer is stopped.
         public event TransferEventHandler Complete; //This will be called when a transfer is complete.
+        public event EventHandler Disconnected;//And as you can tell, it will be called upon disconnection.
         public Dictionary<int, queue> Transfers
         {
             get { return _transfers; }
@@ -114,8 +115,8 @@ namespace NetworkApp
             OutputFolder = null;
 
             //Call disconnected
-            //if (Disconnected != null)
-            //    Disconnected(this, EventArgs.Empty);
+           if (Disconnected != null)
+              Disconnected(this, EventArgs.Empty);
         }
 
 
