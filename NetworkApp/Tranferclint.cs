@@ -12,7 +12,13 @@ namespace NetworkApp
     public delegate void ConnectCallback(object sender, string error);
 
     class Tranferclint
+
     {
+
+        public delegate void cilentReviceHandler( byte[] data);
+
+        public event cilentReviceHandler Receive;
+
         private Dictionary<int, queue> _transfers = new Dictionary<int, queue>();
         public delegate void TransferEventHandler(object sender, queue queue);
         public event TransferEventHandler Queued; //This will be called when a transfer is queued.
@@ -304,8 +310,9 @@ namespace NetworkApp
         {
             try
             {
-                //Call EndReceive to get the amount available.
-                int found = _baseSocket.EndReceive(ar);
+               
+                    //Call EndReceive to get the amount available.
+                    int found = _baseSocket.EndReceive(ar);
 
                 //If found is or is greater than 4 (Meaning our size bytes are there)
                 //We will actually read it from our buffer.
@@ -334,7 +341,11 @@ namespace NetworkApp
                     process();
                 }
 
-
+              
+                
+                   
+                
+                
                 Run();
             }
             catch

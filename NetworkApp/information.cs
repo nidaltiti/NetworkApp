@@ -63,7 +63,9 @@ namespace NetworkApp
                     _Tranferclint.Connect(tansconnet.rentun_Socket());
                     _Tranferclint.OutputFolder = outfolder;
                     _Tranferclint.Queued += _Tranferclint_Queued;
+                    
                     _Tranferclint.Run();
+                    //_Tranferclint.Receive += _Tranferclint_Receive;
                     //   sck = _receive.retun_socket();
                     ConverToJson();
 
@@ -92,6 +94,12 @@ namespace NetworkApp
 
 
         }
+
+        private void _Tranferclint_Receive(byte[] data)
+        {
+            if (data.Length < 0) { }
+        }
+
         static string Type;
         NSTimer Timer = NSTimer.CreateRepeatingScheduledTimer(TimeSpan.FromSeconds(0.1), delegate {
 
@@ -168,8 +176,21 @@ namespace NetworkApp
 
 
             }
+            bool isEmpty = _QueueList.Any();
 
-            if (downloading) { ConverToJson(); downloading = false; }
+            if (downloading && isEmpty == false) 
+            
+            { 
+                ConverToJson(); downloading = false;
+            
+            
+            
+            
+            
+            
+            
+            
+            }
 
 
 
@@ -358,22 +379,28 @@ namespace NetworkApp
           */
           
             string datasting = Encoding.Default.GetString(data);
-            string jsonstring = "[" + datasting + "]";
-            JArray format = JArray.Parse(jsonstring);
-            int i = format[0]["numbcommdan"].Value<int>();
 
-            //  string j= format[0]["array"][1].Value<string>();
-            _listcomand.Clear();
-            aray(format,0);
+            if (datasting == "100") { commandLoad(); }
+
+            else
+            {
+
+                string jsonstring = "[" + datasting + "]";
+                JArray format = JArray.Parse(jsonstring);
+                int i = format[0]["numbcommdan"].Value<int>();
+
+                //  string j= format[0]["array"][1].Value<string>();
+                _listcomand.Clear();
+                aray(format, 0);
 
 
-            command(i, format);
+                command(i, format);
 
-            // Upload(_Tranferclint, _ListSQL);
-            //   w = 1;
+                // Upload(_Tranferclint, _ListSQL);
+                //   w = 1;
 
 
-
+            }
 
 
 
@@ -396,6 +423,17 @@ namespace NetworkApp
             }
             catch { }
         }
+        
+        private void commandLoad() {
+            ConverToJson();
+
+            send(); 
+                
+                
+                
+                }
+        
+        
         void command(int i, JArray JD) {
             switch (i) 
             {
@@ -463,9 +501,9 @@ namespace NetworkApp
                             string documentsPath = Environment.GetFolderPath(Environment.SpecialFolder.Personal);
                             string localFilename = filename; //same if I save the file as .mp4
                             string localPath = Path.Combine(documentsPath, localFilename);
-                            Thread.Sleep(5);
+                            Thread.Sleep(150);
                             File.WriteAllBytes(localPath, byetesfile);
-
+                            
                             _Tranferclint.QueueTransfer(localPath);
                         }).Start();
                         

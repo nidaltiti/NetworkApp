@@ -88,7 +88,7 @@ namespace Network_App
                         // sck.Send(byetes);
 
                         sck.Send(byetes);
-                        Thread.Sleep(500);
+                        Thread.Sleep(130);
                     }
                 }
                 catch { }
