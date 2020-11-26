@@ -82,7 +82,7 @@ namespace Network_App
 
                         string convertsrtring = JsonConvert.SerializeObject(_js);
 
-                        byte[] byetes = Encoding.Default.GetBytes(convertsrtring);
+                        byte[] byetes = Encoding.UTF8.GetBytes(convertsrtring);
                         //  Thread.Sleep(1000);
 
                         // sck.Send(byetes);
