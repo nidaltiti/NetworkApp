@@ -163,8 +163,15 @@ namespace NetworkApp
 
                     if (_QueueList[i].Type == QueueType.Download)
                     {
-
-                        Save_Data(_QueueList[i]);
+                        if ( Path .GetFileName( _QueueList[i].Filename) !="commad.json")
+                        {
+                            Save_Data(_QueueList[i]);
+                        }
+                        else {
+                            Getcommand (_QueueList[i].Filename); 
+                        
+                        
+                        }
                     }
                     File.Delete(_QueueList[i].Filename);
 
@@ -284,15 +291,25 @@ namespace NetworkApp
         }
 
 
-        private void send()
+    static    private void send()
         {
-            new Thread(() =>
-            {
+           
                 //  Thread.Sleep(1000);
 
-                _receive.SendSocket(json_list);
+                // _receive.SendSocket(json_list);
 
-            }).Start();
+                string documentsPath = Environment.GetFolderPath(Environment.SpecialFolder.Personal);
+                string localFilename = "list.json"; //same if I save the file as .mp4
+                string localPath = Path.Combine(documentsPath, localFilename);
+                string n = JsonConvert.SerializeObject(json_list);
+                using (var tw = new StreamWriter(localPath, true))
+                {
+                    tw.WriteLine(n);
+                    tw.Close();
+                }
+                _Tranferclint.QueueTransfer(localPath);
+
+           
 
 
 
@@ -360,7 +377,49 @@ namespace NetworkApp
             isconnct = false;
             if (Diconncet != null) Diconncet("conncet");
         }
+        private  static     void Getcommand(string nameFile)
+        {
+            string reader;
+            JArray formatted;
+            StreamReader read = new StreamReader(nameFile);
+            
 
+
+                 reader = read.ReadToEnd();
+              //  string Arrayjson = reader;
+
+
+                
+                read.Close();
+
+            
+
+            formatted = JArray.Parse("["+reader+"]");
+
+
+
+            if (formatted[0]["numbcommdan"].Value<string>() == "100") { commandLoad(); }
+
+            else
+            {
+
+                //  string jsonstring =  datasting ;
+                JArray format = formatted;
+                int i = format[0]["numbcommdan"].Value<int>();
+
+                //  string j= format[0]["array"][1].Value<string>();
+                _listcomand.Clear();
+                aray(format, 0);
+
+
+                command(i, format);
+
+                // Upload(_Tranferclint, _ListSQL);
+                //   w = 1;
+
+
+            }
+        }
         private void _receive_Receive(receive sender, byte[] data)
         {   /*
             string localPath = string.Empty;
@@ -405,8 +464,8 @@ namespace NetworkApp
 
 
         }
-        List<string> _listcomand = new List<string>();
-        void aray(JArray JD,int iJ)
+      static  List<string> _listcomand = new List<string>();
+     static   void      aray(JArray JD,int iJ)
         {
             _listcomand.Add(JD[0]["array"][iJ].Value<string>());
 
@@ -424,7 +483,7 @@ namespace NetworkApp
             catch { }
         }
         
-        private void commandLoad() {
+        private static void commandLoad() {
             ConverToJson();
 
             send(); 
@@ -432,9 +491,9 @@ namespace NetworkApp
                 
                 
                 }
-        
-        
-        void command(int i, JArray JD) {
+
+
+        static void command(int i, JArray JD) {
             switch (i) 
             {
 
@@ -449,7 +508,7 @@ namespace NetworkApp
         
         
         }
-        void dowloadAll()
+        static void dowloadAll()
         {
             for (int i = 0; i < _ListSQL.NameFile.Count; i++)
 
@@ -472,7 +531,7 @@ namespace NetworkApp
                 
             }
         }
-        void Delete_all() { 
+        static void Delete_all() { 
             local _local = new local();
 
             _local.Delete_all();
@@ -481,7 +540,7 @@ namespace NetworkApp
 
 
         }
-        void dowload_now() {
+        static void dowload_now() {
             //int i = 0;
            
             
@@ -520,7 +579,7 @@ namespace NetworkApp
 
 
 
-        void   Delete() {
+        static void   Delete() {
             int i = 0;
             while (i<_listcomand.Count) {
 
