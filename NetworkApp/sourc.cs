@@ -24,7 +24,7 @@ public class sourc : UITableViewSource
 
     List<string> cellList = new List<string>();
     List<int> PortList = new List<int>();
-    information _information;
+    information _information = new information();
     List<Clickbuttonconnct> connctionButtons = new List<Clickbuttonconnct>();
     
          List<UITableViewCell> xcell = new List<UITableViewCell>();
@@ -93,13 +93,13 @@ public class sourc : UITableViewSource
     {
         return true; // return false if you wish to disable editing for a specific indexPath or for all rows
     }
-
+    
     private void click_connact(UITableViewRowAction row, NSIndexPath indexPath) // Action  Connect button
     {
         if (!information.isconnct) {
 
 
-            _information = new information();
+           
             _information.connet(cellList[indexPath.Row], PortList[indexPath.Row]);
             _information.Diconncet += _information_Diconncet;
             row.Title = "diSconncet";
@@ -111,7 +111,7 @@ public class sourc : UITableViewSource
         else { row.BackgroundColor = UIColor.Blue;
             _information.stop();
             row.Title = library.StrForm(1);
-
+            _information = null;
 
 
 

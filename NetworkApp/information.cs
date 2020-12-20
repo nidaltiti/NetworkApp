@@ -47,23 +47,23 @@ namespace NetworkApp
             try { isconnct = true;
 
 
-                new Thread(() => {
+             
 
                     // Thread.Sleep(500);
                     tansconnet = new Connect(Address, port);
 
-                    connect = new Connect(Address, --port);
+                   // connect = new Connect(Address, --port);
 
 
-                    _receive = new receive(connect.rentun_Socket());
+                   // _receive = new receive(connect.rentun_Socket());
 
-                    _receive.Receive += _receive_Receive;
+                 //   _receive.Receive += _receive_Receive;
 
-                    _receive.Diconncet += _receive_Diconncet;
+                   // _receive.Diconncet += _receive_Diconncet;
                     _Tranferclint.Connect(tansconnet.rentun_Socket());
                     _Tranferclint.OutputFolder = outfolder;
                     _Tranferclint.Queued += _Tranferclint_Queued;
-                    
+                _Tranferclint.Disconnected += _Tranferclint_Disconnected;
                     _Tranferclint.Run();
                     //_Tranferclint.Receive += _Tranferclint_Receive;
                     //   sck = _receive.retun_socket();
@@ -72,7 +72,7 @@ namespace NetworkApp
                     send();
 
 
-                }).Start();
+             
 
 
 
@@ -93,6 +93,20 @@ namespace NetworkApp
 
 
 
+        }
+
+        private void _Tranferclint_Disconnected(object sender, EventArgs e)
+        {foreach (queue q in _QueueList) { q.Close(); }
+
+           
+
+            _Tranferclint.Close();
+           // _Tranferclint = null;
+          //  isconnct = true;
+            _QueueList.Clear();
+            isconnct = false;
+              if (Diconncet != null) Diconncet("conncet");
+            // throw new NotImplementedException();
         }
 
         private void _Tranferclint_Receive(byte[] data)
@@ -372,11 +386,11 @@ namespace NetworkApp
 
 
 
-        private void _receive_Diconncet(receive sender, byte[] data)
-        {
-            isconnct = false;
-            if (Diconncet != null) Diconncet("conncet");
-        }
+        //private void _receive_Diconncet(receive sender, byte[] data)
+        //{
+        //    isconnct = false;
+        //    if (Diconncet != null) Diconncet("conncet");
+        //}
         private  static     void Getcommand(string nameFile)
         {
             string reader;
@@ -420,50 +434,50 @@ namespace NetworkApp
 
             }
         }
-        private void _receive_Receive(receive sender, byte[] data)
-        {   /*
-            string localPath = string.Empty;
-            //throw new NotImplementedException();
-            new Thread(() =>
-            {
-                string documentsPath = Environment.GetFolderPath(Environment.SpecialFolder.Personal);
-                string localFilename = _ListSQL.NameFile[0]; //same if I save the file as .mp4
-                 localPath = Path.Combine(documentsPath, localFilename);
+        //private void _receive_Receive(receive sender, byte[] data)
+        //{   /*
+        //    string localPath = string.Empty;
+        //    //throw new NotImplementedException();
+        //    new Thread(() =>
+        //    {
+        //        string documentsPath = Environment.GetFolderPath(Environment.SpecialFolder.Personal);
+        //        string localFilename = _ListSQL.NameFile[0]; //same if I save the file as .mp4
+        //         localPath = Path.Combine(documentsPath, localFilename);
                
-                File.WriteAllBytes(localPath, _ListSQL.ImageToBytes[0]);
-                Thread.Sleep(100);
-                _Tranferclint.QueueTransfer(localPath);
-            }).Start();
+        //        File.WriteAllBytes(localPath, _ListSQL.ImageToBytes[0]);
+        //        Thread.Sleep(100);
+        //        _Tranferclint.QueueTransfer(localPath);
+        //    }).Start();
            
-          */
+        //  */
           
-            string datasting = Encoding.Default.GetString(data);
+        //    string datasting = Encoding.Default.GetString(data);
 
-            if (datasting == "100") { commandLoad(); }
+        //    if (datasting == "100") { commandLoad(); }
 
-            else
-            {
+        //    else
+        //    {
 
-                string jsonstring = "[" + datasting + "]";
-                JArray format = JArray.Parse(jsonstring);
-                int i = format[0]["numbcommdan"].Value<int>();
+        //        string jsonstring = "[" + datasting + "]";
+        //        JArray format = JArray.Parse(jsonstring);
+        //        int i = format[0]["numbcommdan"].Value<int>();
 
-                //  string j= format[0]["array"][1].Value<string>();
-                _listcomand.Clear();
-                aray(format, 0);
-
-
-                command(i, format);
-
-                // Upload(_Tranferclint, _ListSQL);
-                //   w = 1;
+        //        //  string j= format[0]["array"][1].Value<string>();
+        //        _listcomand.Clear();
+        //        aray(format, 0);
 
 
-            }
+        //        command(i, format);
+
+        //        // Upload(_Tranferclint, _ListSQL);
+        //        //   w = 1;
+
+
+        //    }
 
 
 
-        }
+        //}
       static  List<string> _listcomand = new List<string>();
      static   void      aray(JArray JD,int iJ)
         {
@@ -620,7 +634,7 @@ namespace NetworkApp
             isconnct = false;
             try
             {
-                connect.close();
+               // connect.close();
                 _Tranferclint.Close();
                 _QueueList.Clear();
                 tansconnet.close();
