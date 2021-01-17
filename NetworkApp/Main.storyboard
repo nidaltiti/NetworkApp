@@ -285,6 +285,7 @@
                     <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
                         <outlet property="paypal_button" destination="43488" id="name-outlet-43488"/>
+                        <outlet property="ShwichAuto" destination="43442" id="name-outlet-43442"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="37452" userLabel="First Responder" sceneMemberID="firstResponder"/>
