@@ -37,7 +37,7 @@ namespace Network_App
 
         }
         public override void LoadView()
-        {
+        { 
            /// buttn.TouchUpOutside += Buttn_TouchUpOutside;
 
             bar = this;
@@ -76,6 +76,7 @@ namespace Network_App
                  //   img.imG.ViewDidLoad();
                     changebuttonclick();
                     this.NavigationItem.LeftBarButtonItems = null;
+                    buttn.Hidden = false;
                 }
 
 
@@ -90,15 +91,24 @@ namespace Network_App
 
                    // Change(Secbutton, true);
                     this.NavigationItem.SetLeftBarButtonItem(Secbutton, true);
-                    Secbutton.Title = "Select";
+
+                    buttn.Hidden = false;
+
+                }
+
+                if (TabBar.SelectedItem.Title == library.Tabs(2)) { this.NavigationItem.SetLeftBarButtonItem(null, false);
+                    // this.NavigationItem.SetRightBarButtonItem(buttn, false);
+                    buttn.Hidden = true;
+                    title(library.Tabs(2));
+                    // Secbutton.Title = "Setting";
+
 
 
                 }
 
 
-              
 
-          
+
             };
         }
         /// <summary>

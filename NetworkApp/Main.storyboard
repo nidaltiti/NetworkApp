@@ -86,11 +86,12 @@
                         <segue destination="BYZ-38-t0r" kind="relationship" relationship="viewControllers" id="1314"/>
                         <outlet property="nag" destination="1182" id="name-outlet-1182"/>
                         <segue id="37194" destination="31706" kind="relationship" relationship="viewControllers"/>
+                        <segue id="37695" destination="37450" kind="relationship" relationship="viewControllers"/>
                     </connections>
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="1005" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-903" y="1140"/>
+            <point key="canvasLocation" x="-986" y="1214"/>
         </scene>
         <!--Images-->
         <scene sceneID="3395">
@@ -246,6 +247,49 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="31712" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="246" y="1160"/>
+        </scene>
+        <scene sceneID="37449">
+            <objects>
+                <viewController id="37450" sceneMemberID="viewController" storyboardIdentifier="settings" customClass="settings">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="37447"/>
+                        <viewControllerLayoutGuide type="bottom" id="37448"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="37451">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <subviews>
+                            <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" id="43442" translatesAutoresizingMaskIntoConstraints="NO" fixedFrame="YES">
+                                <rect key="frame" x="331" y="159" width="51" height="31"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            </switch>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="43465" translatesAutoresizingMaskIntoConstraints="NO" fixedFrame="YES" text="Save files into  gallery ios  (Auto) ">
+                                <rect key="frame" x="29" y="164" width="253" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="43488" translatesAutoresizingMaskIntoConstraints="NO" fixedFrame="YES">
+                                <rect key="frame" x="35" y="336" width="341" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Donate on Paypal 0.25$"/>
+                                <connections>
+                                    <action selector="Paypal_button_TouchUpInside:" destination="37450" id="45251" eventType="touchUpInside"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                    </view>
+                    <tabBarItem key="tabBarItem" title="Item" id="37694"/>
+                    <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
+                    <connections>
+                        <outlet property="paypal_button" destination="43488" id="name-outlet-43488"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="37452" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="909" y="1401"/>
         </scene>
     </scenes>
 </document>
