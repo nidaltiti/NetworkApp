@@ -22,7 +22,7 @@ namespace Network_App
         Message library = new Message();
         //UITextField field =  new UITextField;
         //UITextField field2 = null;
-       
+      
 
      //   public static string titile;
         //public static string GetEnumDescription( Enum value)

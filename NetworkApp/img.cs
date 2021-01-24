@@ -51,8 +51,8 @@ namespace NetworkApp
         }
         public override void ViewDidLoad()
         {
-
-            reload();
+           _Select = false;
+           reload();
             imG = this;
             // reload(0);
         }
@@ -143,10 +143,10 @@ namespace NetworkApp
             {
                 _Select = false;
 
-                Nettab.bar.changebuttonclick();
+                Nettab.bar.changebuttonclick(_Select);
 
 
-                // ViewDidLoad();
+                 ViewDidLoad();
             }
 
         }
@@ -154,15 +154,11 @@ namespace NetworkApp
         {
 
             var alert = UIAlertController.Create("", "", UIAlertControllerStyle.ActionSheet);
-            alert.AddAction(UIAlertAction.Create("Settings", UIAlertActionStyle.Default, (UIAlertAction obj) => {
-
-                _Select = false;
-
-            }));
+            
 
             alert.AddAction(UIAlertAction.Create("Select", UIAlertActionStyle.Default, (UIAlertAction obj) => {
                 _Select = true;
-                Nettab.bar.changebuttonclick();
+                Nettab.bar.changebuttonclick(_Select);
             }));
 
             /// end Select
@@ -201,7 +197,7 @@ namespace NetworkApp
                 //        Console.WriteLine("error:" + error);
                 //    });
                 //}
-                //Nettab.bar.changebuttonclick();
+            
 
 
                 //ViewDidLoad();
@@ -212,12 +208,12 @@ namespace NetworkApp
             alert.AddAction(UIAlertAction.Create("Share", UIAlertActionStyle.Default, (UIAlertAction obj) => {
                 sharebox();
 
-                //  Nettab.bar.changebuttonclick();
+             
 
 
                 // ViewDidLoad();
 
-                // Nettab.bar.changebuttonclick();
+              
 
 
                 ViewDidLoad();
@@ -225,7 +221,7 @@ namespace NetworkApp
 
 
             alert.AddAction(UIAlertAction.Create("Delete", UIAlertActionStyle.Destructive, (UIAlertAction obj) => { alertsure("Delete"); }));
-            alert.AddAction(UIAlertAction.Create("Cancel", UIAlertActionStyle.Cancel, (UIAlertAction obj) => { ViewDidLoad(); }));
+            alert.AddAction(UIAlertAction.Create("Cancel", UIAlertActionStyle.Cancel, (UIAlertAction obj) => { ViewDidLoad(); _Select = false; Nettab.bar.changebuttonclick(_Select); }));
             this.PresentViewController(alert, true, null);
         }
 
@@ -265,7 +261,7 @@ namespace NetworkApp
                 }
             }
 
-            Nettab.bar.changebuttonclick();
+            Nettab.bar.changebuttonclick(false);
 
 
 
@@ -294,7 +290,7 @@ namespace NetworkApp
 
 
                         Cancelaction = (UIAlertAction => {
-                            //  Nettab.bar.changebuttonclick();
+                            
 
 
                             ViewDidLoad();
@@ -323,7 +319,7 @@ namespace NetworkApp
                         okaction = (UIAlertAction => { DeleteSection(); });
 
                         Cancelaction = (UIAlertAction => {
-                            //  Nettab.bar.changebuttonclick();
+                         
 
 
                             ViewDidLoad();

@@ -26,6 +26,10 @@ namespace NetworkApp
         [GeneratedCode ("iOS Designer", "1.0")]
         partial void Paypal_button_TouchUpInside (UIKit.UIButton sender);
 
+        [Action ("ShwichAutoChange:")]
+        [GeneratedCode ("iOS Designer", "1.0")]
+        partial void ShwichAutoChange (UIKit.UISwitch sender);
+
         void ReleaseDesignerOutlets ()
         {
             if (paypal_button != null) {

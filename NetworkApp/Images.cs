@@ -141,7 +141,7 @@ namespace Network_App
             if (_Select==false) { _alert();  _Select = true; }
             else { _Select = false;
 
-                Nettab.bar.changebuttonclick();
+                Nettab.bar.changebuttonclick(_Select);
 
 
                 ViewDidLoad(); }
@@ -162,7 +162,7 @@ namespace Network_App
 
             alert.AddAction(UIAlertAction.Create("Select", UIAlertActionStyle.Default, (UIAlertAction obj) => {
                 _Select = true;
-                Nettab.bar.changebuttonclick();
+                Nettab.bar.changebuttonclick(_Select);
             }));
           
             /// end Select
@@ -238,7 +238,7 @@ namespace Network_App
                         Console.WriteLine("error:" + error);
                     });
                 }
-            Nettab.bar.changebuttonclick();
+            Nettab.bar.changebuttonclick(false);
 
 
             ViewDidLoad();

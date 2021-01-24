@@ -67,14 +67,18 @@ namespace Network_App
                   //  ViewController._ViewController.ViewDidLoad();
                     title(library.Tabs(0));
                     shwich =0;
-                //    sendbutton.Enabled = false;
-                  //  NavigationItem.SetLeftBarButtonItem(null, true);
+                    //    sendbutton.Enabled = false;
+                    //  NavigationItem.SetLeftBarButtonItem(null, true);
                     //   NavigationItem.SetLeftBarButtonItem(null, true);
                     // NavigationItem.SetLeftBarButtonItems()
-                 //   this.NavigationItem.LeftBarButtonItems = null;
-                    img.imG.is_Select();
+                    //   this.NavigationItem.LeftBarButtonItems = null;
+                    try
+                    {
+                        img.imG.is_Select();
+                    }
+                    catch { }
                  //   img.imG.ViewDidLoad();
-                    changebuttonclick();
+                    changebuttonclick(false);
                     this.NavigationItem.LeftBarButtonItems = null;
                     buttn.Hidden = false;
                 }
@@ -91,19 +95,23 @@ namespace Network_App
 
                    // Change(Secbutton, true);
                     this.NavigationItem.SetLeftBarButtonItem(Secbutton, true);
+                 //   changebuttonclick(); // change selectbutton 
 
                     buttn.Hidden = false;
 
                 }
 
-                if (TabBar.SelectedItem.Title == library.Tabs(2)) { this.NavigationItem.SetLeftBarButtonItem(null, false);
+                if (TabBar.SelectedItem.Title == library.Tabs(2)) { 
+                    this.NavigationItem.SetLeftBarButtonItem(null, false);
                     // this.NavigationItem.SetRightBarButtonItem(buttn, false);
                     buttn.Hidden = true;
                     title(library.Tabs(2));
                     // Secbutton.Title = "Setting";
 
-
-
+                    changebuttonclick(false);
+                    this.NavigationItem.LeftBarButtonItems = null;
+                    // changebuttonclick();
+                  
                 }
 
 
@@ -175,12 +183,12 @@ namespace Network_App
 
             this.NavigationItem.LeftBarButtonItems = listithem;
         }
-        public void changebuttonclick() // change selectbutton 
+        public void changebuttonclick(bool ar) // change selectbutton 
         {
 
 
 
-            if (Secbutton.Title == "Cancel")
+            if (ar == false)
             {
                 this.NavigationItem.SetLeftBarButtonItem(null, true);
 

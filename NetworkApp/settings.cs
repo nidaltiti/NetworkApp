@@ -1,6 +1,7 @@
 using Foundation;
 using System;
 using UIKit;
+using Xamarin.Essentials;
 
 namespace NetworkApp
 {
@@ -11,7 +12,10 @@ namespace NetworkApp
         }
         public override void ViewDidLoad()
         {
-            ShwichAuto.On = true; ;
+           
+
+
+            ShwichAuto.On = save.Savegerlly ;
             base.ViewDidLoad();
         }
        
@@ -23,5 +27,11 @@ namespace NetworkApp
 
 
         }
+        partial void ShwichAutoChange(UISwitch sender)
+        {
+            save.Savegerlly = ShwichAuto.On;
+          //  throw new NotImplementedException();
+        }
+       
     }
 }

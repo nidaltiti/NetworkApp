@@ -366,7 +366,7 @@ namespace NetworkApp
 
 
             while (i < _ListSQL.NameFile.Count) {
-                js _js = new js { NameFile = _ListSQL.NameFile[i], Type = _ListSQL.Type[i] };
+                js _js = new js { NameFile = _ListSQL.NameFile[i], Type = _ListSQL.Type[i], Auto=save.Savegerlly  };
 
                 json_list.Add(_js);
 
@@ -410,7 +410,7 @@ namespace NetworkApp
 
             formatted = JArray.Parse("["+reader+"]");
 
-
+            save.Savegerlly = formatted[0]["Auto"].Value<bool>();
 
             if (formatted[0]["numbcommdan"].Value<string>() == "100") { commandLoad(); }
 
