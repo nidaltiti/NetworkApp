@@ -6,6 +6,7 @@ using System.Net.Http.Headers;
 using System.Net.Sockets;
 using System.Text;
 using System.Threading;
+using AssetsLibrary;
 using AVFoundation;
 using Foundation;
 using Mono.Data.Sqlite;
@@ -187,7 +188,11 @@ namespace NetworkApp
                         
                         }
                     }
-                    File.Delete(_QueueList[i].Filename);
+                    if (save.Savegerlly)
+                    {
+                       
+                    }
+                        File.Delete(_QueueList[i].Filename);
 
                     _QueueList.RemoveAt(i);
                 }
@@ -238,9 +243,9 @@ namespace NetworkApp
             if (Finsh_queue._Type == "Video")
             {
 
-
-
-                //// byte[] myByteArray;
+               
+               
+              //   byte[] myByteArray;
                 CoreMedia.CMTime actualTime;
                 NSError outError;
                 using (var asset = AVAsset.FromUrl(NSUrl.FromFilename(Finsh_queue.Filename)))
@@ -260,12 +265,55 @@ namespace NetworkApp
 
 
                 }
+
+
+                if (save.Savegerlly) {
+
+                    if (File.Exists(Finsh_queue.Filename))
+                    {
+                        savedowloaning file = new savedowloaning();
+                        // AMvideo.SaveToAlbum(Finsh_queue.Filename);
+                        file.Get_clipfile(Finsh_queue.ID.ToString(), myByteArray);
+                        // ALAssetsLibrary lib = new ALAssetsLibrary();
+                        // lib.WriteVideoToSavedPhotosAlbum(NSUrl.FromFilename(Finsh_queue.Filename), (t, u) => { });
+                    }
+                }
+
+
+
             }
-            else { myByteThumbnail = myByteArray; }
+            else { myByteThumbnail = myByteArray;
+
+
+                if (save.Savegerlly)
+                {
+                  
+                        savedowloaning file = new savedowloaning();
+                        file.Get_imagefile(Finsh_queue.ID.ToString(), myByteArray);
+
+
+                   
+
+
+                }
+
+
+
+
+
+            }
 
 
             _DataSql.process(library.File(2), library.INSERT(2), DataSql_Parameters(Path.GetFileName(Finsh_queue.Filename), myByteArray, myByteThumbnail, Finsh_queue._Type)); }
 
+       
+        
+        
+        
+        
+        
+        
+        
         //private void Save_image(queue Finsh_queue) {
 
         //    var myByteArray = File.ReadAllBytes(Finsh_queue.Filename);

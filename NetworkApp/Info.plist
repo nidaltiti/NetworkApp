@@ -2,8 +2,6 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
-	<key>CFBundleDisplayName</key>
-	<string>NetworkApp</string>
 	<key>CFBundleShortVersionString</key>
 	<string>1.0</string>
 	<key>CFBundleVersion</key>
@@ -35,12 +33,16 @@
 	<key>UIRequiresFullScreen</key>
 	<true/>
 	<key>CFBundleIdentifier</key>
-	<string>com.NetworkApp</string>
+	<string>com.Galleryfly</string>
 	<key>CFBundleName</key>
 	<string>NetworkApp</string>
 	<key>NSAppleMusicUsageDescription</key>
 	<string>media</string>
 	<key>NSPhotoLibraryAddUsageDescription</key>
 	<string>photo</string>
+	<key>CFBundleDisplayName</key>
+	<string>Galleryfly</string>
+	<key>XSAppIconAssets</key>
+	<string>media.xcassets/AppIcons.appiconset</string>
 </dict>
 </plist>

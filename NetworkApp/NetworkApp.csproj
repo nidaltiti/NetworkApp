@@ -12,7 +12,7 @@
     <IPhoneResourcePrefix>Resources</IPhoneResourcePrefix>
     <MtouchEnableSGenConc>true</MtouchEnableSGenConc>
     <MtouchHttpClientHandler>NSUrlSessionHandler</MtouchHttpClientHandler>
-    <ProvisioningType>automatic</ProvisioningType>
+    <ProvisioningType>manual</ProvisioningType>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|iPhoneSimulator' ">
     <DebugSymbols>true</DebugSymbols>
@@ -67,6 +67,12 @@
   <PropertyGroup Condition=" '$(RunConfiguration)' == 'Default' ">
     <AppExtensionDebugBundleId />
   </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationIcon>icon galleyfly.ico</ApplicationIcon>
+  </PropertyGroup>
+  <PropertyGroup>
+    <NoWin32Manifest>true</NoWin32Manifest>
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="Mono.Data.Sqlite" />
     <Reference Include="System" />
@@ -91,46 +97,61 @@
     <PackageReference Include="Xamarin.Essentials" Version="1.6.0" />
   </ItemGroup>
   <ItemGroup>
-    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\Contents.json">
+    <ImageAsset Include="media.xcassets\AppIcons.appiconset\Contents.json">
       <Visible>false</Visible>
     </ImageAsset>
-    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\Icon1024.png">
+    <ImageAsset Include="media.xcassets\AppIcons.appiconset\G_fly  60.png">
       <Visible>false</Visible>
     </ImageAsset>
-    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\Icon167.png">
+    <ImageAsset Include="media.xcassets\AppIcons.appiconset\G_fly (1).png">
       <Visible>false</Visible>
     </ImageAsset>
-    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\Icon120.png">
+    <ImageAsset Include="media.xcassets\AppIcons.appiconset\G_fly (3).png">
       <Visible>false</Visible>
     </ImageAsset>
-    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\Icon152.png">
+    <ImageAsset Include="media.xcassets\AppIcons.appiconset\G_fly .png">
       <Visible>false</Visible>
     </ImageAsset>
-    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\Icon180.png">
+    <ImageAsset Include="media.xcassets\AppIcons.appiconset\G_fly1046 .png">
       <Visible>false</Visible>
     </ImageAsset>
-    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\Icon29.png">
+    <ImageAsset Include="media.xcassets\AppIcons.appiconset\G_fly120 .png">
       <Visible>false</Visible>
     </ImageAsset>
-    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\Icon40.png">
+    <ImageAsset Include="media.xcassets\AppIcons.appiconset\G_fly152 .png">
       <Visible>false</Visible>
     </ImageAsset>
-    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\Icon58.png">
+    <ImageAsset Include="media.xcassets\AppIcons.appiconset\G_fly167 .png">
       <Visible>false</Visible>
     </ImageAsset>
-    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\Icon76.png">
+    <ImageAsset Include="media.xcassets\AppIcons.appiconset\G_fly20 .png">
       <Visible>false</Visible>
     </ImageAsset>
-    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\Icon80.png">
+    <ImageAsset Include="media.xcassets\AppIcons.appiconset\G_fly29 .png">
       <Visible>false</Visible>
     </ImageAsset>
-    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\Icon87.png">
+    <ImageAsset Include="media.xcassets\AppIcons.appiconset\G_fly40 .png">
       <Visible>false</Visible>
     </ImageAsset>
-    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\Icon20.png">
+    <ImageAsset Include="media.xcassets\AppIcons.appiconset\G_fly40 1.png">
       <Visible>false</Visible>
     </ImageAsset>
-    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\Icon60.png">
+    <ImageAsset Include="media.xcassets\AppIcons.appiconset\G_fly58 .png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="media.xcassets\AppIcons.appiconset\G_fly58 1.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="media.xcassets\AppIcons.appiconset\G_fly76 .png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="media.xcassets\AppIcons.appiconset\G_fly80 .png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="media.xcassets\AppIcons.appiconset\G_fly80 1.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="media.xcassets\AppIcons.appiconset\G_fly87 .png">
       <Visible>false</Visible>
     </ImageAsset>
   </ItemGroup>
@@ -197,6 +218,7 @@
     <Compile Include="PacketIO.cs" />
     <Compile Include="Queue.cs" />
     <Compile Include="receive.cs" />
+    <Compile Include="savedowloaning.cs" />
     <Compile Include="settings.cs" />
     <Compile Include="settings.designer.cs">
       <DependentUpon>settings.cs</DependentUpon>
@@ -221,6 +243,9 @@
     <Compile Include="ViewWer.designer.cs">
       <DependentUpon>ViewWer.cs</DependentUpon>
     </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="icon galleyfly.ico" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\iOS\Xamarin.iOS.CSharp.targets" />
 </Project>
