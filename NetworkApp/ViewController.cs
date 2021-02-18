@@ -119,7 +119,7 @@ namespace Network_App
                     field2.Layer.BorderWidth = 1;
                     field2.Font = library.Font();
 
-                    field2.Text = 2321.ToString();
+                    field2.Text = 9.ToString();
 
                     // field.Layer.CornerRadius = 40;
                     //  field2.SecureTextEntry = true;

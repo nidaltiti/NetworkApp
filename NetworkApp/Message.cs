@@ -11,7 +11,7 @@ namespace Network_App
     class Message:LibraryWords 
     {
 
-        string[] message= { " Put your ip please", };
+        string[] message= { " Galleryfly-Win Ip", };
         string[] erorMessages = { "is not number" };
         public string Messages(int number) {
 

@@ -59,8 +59,8 @@
         <!--Network-->
         <scene sceneID="1000">
             <objects>
-                <tabBarController title="Network" id="1001" customClass="Nettab" sceneMemberID="viewController">
-                    <navigationItem key="navigationItem" title="Network" id="1182">
+                <tabBarController id="1001" customClass="Nettab" sceneMemberID="viewController" title="Galleryfly">
+                    <navigationItem key="navigationItem" title="Galleryfly" id="1182">
                         <barButtonItem key="rightBarButtonItem" style="plain" id="1459">
                             <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1458">
                                 <rect key="frame" x="0.0" y="0.0" width="30" height="44"/>

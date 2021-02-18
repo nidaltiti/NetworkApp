@@ -15,7 +15,7 @@ namespace Network_App
         string[] strWord = { "..", "Library", "Databases", "Data Source=", ";Version=3;", };
         string[] strForm = { " TableCell", "Conncat", "Delete", " Okay", "Cancel" };
 
-        string[] tabs = { " Addrisses", "Images","settings" };
+        string[] tabs = { " Addrisses", "Images","Settings" };
 
         string[] extension = { ".jpg", ".png", ".mp4", ".avi" };
         public static string Row = "@column";
